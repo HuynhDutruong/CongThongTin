@@ -337,7 +337,16 @@
             font-size: 0.85rem;
             color: #D1D5DB;
         }
-
+        
+        @media screen and (max-width: 1024px)
+        {
+            .nav-bar ul {
+                flex-direction: row;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+        }
+        
         @media (max-width: 1024px) {
             .container {
                 flex-direction: column;
