@@ -339,51 +339,7 @@
             font-size: 0.85rem;
             color: #D1D5DB;
         }
-        .live-music-bar {
-            background-color: #FFFFFF;
-            padding: 0.2rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-        .live-music-bar h3 {
-            font-family: 'Merriweather', serif;
-            font-size: 1.25rem;
-            color: #A6192E;
-            margin: 0;
-        }
-        .live-music-bar button {
-            background-color: #A6192E;
-            color: #FFFFFF;
-            padding: 0.3rem;
-            border-radius: 50%;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s, box-shadow 0.2s;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .live-music-bar button:hover {
-            background-color: #8B1625;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-        }
-        .live-music-bar input[type="range"] {
-            width: 100px;
-            accent-color: #A6192E;
-        }
-        @media screen and (max-width: 1024px) {
-            .nav-bar ul {
-                flex-direction: row;
-                overflow-x: auto;
-                white-space: nowrap;
-            }
-        }
+
         @media (max-width: 1024px) {
             .container {
                 flex-direction: column;
@@ -413,6 +369,7 @@
                 width: 80px;
             }
         }
+
         @media (max-width: 800px) {
             .header h1 {
                 font-size: 1.5rem;
@@ -421,15 +378,15 @@
                 font-size: 0.9rem;
             }
             .nav-bar ul {
-                flex-direction: column;
+                flex-direction: row;
                 align-items: center;
             }
             .nav-bar li {
                 margin: 0.5rem 0;
             }
             .nav-bar a {
-                font-size: 0.95rem;
-                padding: 0.75rem 1.5rem;
+                font-size: 0.8rem;
+                padding: 0.65rem 1.4rem;
             }
             .carousel-item img {
                 height: 350px;
@@ -475,10 +432,8 @@
                 height: 45px;
                 font-size: 0.85rem;
             }
-            .live-music-bar input[type="range"] {
-                width: 80px;
-            }
         }
+
         @media (max-width: 576px) {
             .header h1 {
                 font-size: 1.25rem;
@@ -625,20 +580,14 @@
     </div>
     <nav class="nav-bar">
         <ul>
+            <!-- <li><a href="report.html">GỬI PHẢN HỒI</a></li>
+            <li><a href="aaw.html">THẮC MẮC</a></li> -->
             <li><a href="info.html">THÔNG TIN</a></li>
             <li><a href="mass.html">GIỜ LỄ</a></li>
             <li><a href="library.html">THƯ VIỆN</a></li>
             <li><a href="https://m.me/tnttchanhtoamytho" target="_blank">NHẮN TIN</a></li>
         </ul>
     </nav>
-
-    <audio id="liveAudio" src="https://radio.vaticannews.va/stream-vi" preload="none"></audio>
-
-    <div class="live-music-bar">
-        <h3>Radio - Vatican News Tiếng Việt</h3>
-        <input type="range" id="volumeSlider" min="0" max="100" value="50">
-        <button id="playPauseBtn"><i class="fas fa-play"></i></button>
-    </div>
     <a href="aaq.html" class="floating-btn">Hỏi Đáp</a>
     <div class="container">
         <div class="main-content">

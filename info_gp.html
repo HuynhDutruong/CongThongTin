@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông Tin</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #F5F5F5;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: #1A1A1A;
+        }
+        .header {
+            background-color: #A6192E;
+            color: #FFFFFF;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+        .header h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+        .header p {
+            font-size: 1rem;
+        }
+        .container {
+            flex: 1;
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .content {
+            font-size: 1rem;
+            line-height: 1.5;
+            text-align: justify;
+        }
+        .content p {
+            margin-bottom: 1rem;
+        }
+        .content-images {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .content-images img {
+            width: 48%;
+            max-width: 400px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+            border: 1px solid #DDD;
+        }
+        .back-btn {
+            display: inline-block;
+            background-color: #A6192E;
+            color: #FFFFFF;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            text-align: center;
+            margin-bottom: 1rem;
+            transition: background-color 0.3s, box-shadow 0.2s;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 500;
+        }
+        .back-btn:hover {
+            background-color: #8B1625;
+            box-shadow: 0 0 8px #FFD700;
+        }
+        .back-btn:focus {
+            outline: 2px solid #FFD700;
+            outline-offset: 2px;
+        }
+        .footer {
+            background-color: #1A1A1A;
+            color: #FFFFFF;
+            padding: 1rem 0;
+            text-align: center;
+            box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.2);
+            margin-top: auto;
+        }
+        .footer-nav {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+        }
+        .footer-nav li {
+            margin: 0 1rem;
+        }
+        .footer-nav a {
+            color: #FFFFFF;
+            text-decoration: none;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.3s, text-shadow 0.3s;
+            padding: 0.5rem;
+            display: inline-block;
+        }
+        .footer-nav a:hover {
+            color: #FFD700;
+            text-shadow: 0 0 8px rgba(255, 215, 0, 0.8);
+        }
+        .highlight {
+            color: #FFD700;
+            font-weight: 500;
+        }
+        .contact {
+            font-size: 0.9rem;
+            color: #D1D5DB;
+        }
+        .red-bold-uppercase {
+            color: #A6192E; /* Màu đỏ chủ đạo */
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            .container {
+                padding: 1rem;
+            }
+            .content {
+                font-size: 0.85rem;
+            }
+            .content-images img {
+                width: 100%;
+                height: 150px;
+            }
+            .footer-nav li {
+                margin: 0 0.5rem;
+            }
+            .footer-nav a {
+                font-size: 0.9rem;
+                padding: 0.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Thông Tin</h1>
+        <p>Giáo Xứ Chánh Tòa Mỹ Tho</p>
+    </div>
+    <div class="container">
+        <button onclick="history.back()" class="back-btn">Quay Lại</button>
+        <div class="content">
+            <h3>ĐÔI NÉT VỀ GIÁO PHẬN MỸ THO – LỊCH SỬ KHAI SINH GIÁO PHẬN</h3>
+            <div class="content-images">
+                <img src="assets/ctmt.png" alt="Nhà thờ Chánh Tòa Mỹ Tho">
+                <img src="assets/gpmt.png" alt="Giáo Phận Mỹ Tho">
+            </div>
+
+            <h3 class="red-bold-uppercase">THÀNH LẬP</h3>
+            <p>Ngày 24 tháng 11 năm 1960, Đức Thánh Cha Gioan XXIII công bố sắc chỉ Venerabilium Nostrorum thành lập Hàng Giáo Phẩm Việt Nam, trong đó có nói đến việc thành lập 3 giáo phận mới là Mỹ Tho, Đà Lạt và Long Xuyên.</p>
+            <p>Theo sắc chỉ này, Đức Thánh Cha Gioan XXIII đã nâng nhà thờ họ đạo Mỹ Tho lên thành nhà thờ Chánh Tòa Mỹ Tho với danh hiệu Đức Mẹ Vô Nhiễm Nguyên Tội và đặt Cha Giuse Trần Văn Thiện làm Giám Mục tiên khởi giáo phận.</p>
+            <p>Đến ngày 27 tháng 11 năm 1960, Đức Thánh Cha Gioan XXIII ký sắc chỉ Quod Venerabiles Fratres và công bố ngày 8 tháng 12 năm 1960 chính thức thiết lập giáo phận Mỹ Tho như sau: “ Những khu vực hành chánh quen gọi là Long An, Kiến Tường, Kiến Phong và Định Tường, Ta tách biệt ra khỏi giáo phận Sài Gòn và thiết lập thành một giáo phận gọi là Mỹ Tho theo tên tỉnh lỵ Mỹ Tho”.</p>
+            <p>Và đến ngày 1 tháng 12 năm 1960, Tòa Thánh ban sắc phong tuyển chọn Cha Giuse Trần Văn Thiện làm Giám Mục tiên khởi của giáo phận Mỹ Tho.</p>
+
+            <h3 class="red-bold-uppercase">RANH GIỚI</h3>
+            <p>Giáo phận Mỹ Tho khi thành lập gồm có 4 tỉnh Long An, Kiến Tường, Kiến Phong và Định Tường. Sau năm 1975, giáo phận Mỹ Tho bao gồm 3 tỉnh Tiền Giang, Long An, và 2/3 tỉnh Đồng Tháp (trừ vùng Sa Đéc).</p>
+            <p>Đây là một vùng đất rộng lớn thuộc đồng bằng sông Cửu Long, nằm phía tả ngạn sông Tiền: phía Đông Bắc giáp giáo phận Sài Gòn và Phú Cường, phía Tây Nam giáp giáo phận Vĩnh Long và Long Xuyên.</p>
+            <p>Trên phần đất giáo phận Mỹ Tho có nhánh sông Tiền chảy dài từ trên Biển Hồ xuyên qua tỉnh Đồng Tháp và Tiền Giang và đổ ra vùng biển Gò Công. Trên địa bàn tỉnh Long An có hai sông lớn là Vàm Cỏ Đông và Vàm Cỏ Tây.</p>
+            <p>Diện tích chung: 9.262 km2 với số dân hiện nay 4.675.000 người. Đa số dân sinh sống bằng nông nghiệp. Sắc tộc: Phần lớn là người kinh, có một số ít người Hoa, Khơ Me…</p>
+
+            <h3 class="red-bold-uppercase">TÒA GIÁM MỤC</h3>
+            <p>Khi thành lập giáo phận Mỹ Tho năm 1960, Tòa Giám Mục chưa có. Trong thời gian đầu, Đức Giám Mục giáo phận phải tạm trú tại một ngôi nhà ở bên ngoài do chính quyền địa phương lúc bấy giờ cấp cho, nằm trên đường Lê Lợi, đối diện với bưu điện Mỹ Tho.</p>
+            <p>Chính trong thời gian từ sau ngày thành lập giáo phận. Tòa Giám Mục, nhà tĩnh tâm, nghênh đài Đức Mẹ, nahf Cha sở, lần lượt được xây dựng trong cùng khuôn viên cạnh nhà thờ chánh tòa Mỹ Tho, như chúng ta vẫn còn thấy hiện nay. Các công trình này do Cha Micae Nguyễn Khoa Học, Cha sở tiên khởi của nhà thờ chánh tòa đảm trách. Chỉ sau khi xây dựng xong Tòa Giám Mục, Đức Cha Giuse mới vào thường trú tại địa chỉ như hiện nay.</p>
+            <p>Cùng với sự phát triển của giáo phận, Tòa Giám Mục Mỹ Tho ngày càng không thể đáp ứng đủ cho những nhu cầu phục vụ thực tiễn. Để cải thiện tình trạng trên, Đức Cha Phaolô đã quyết định tu sửa và nới rộng Tòa Giám Mục. Công việc này được giao cho Cha quản lý Phêrô Trần Anh Tráng thực hiện vào tháng 10 năm 2008. Sau gần 6 tháng thi công, việc tu sửa Tòa Giám Mục cơ bản hoàn tất, và Đức Cha Phaolô đã chọn ngày 25 tháng 03 năm 2009, lễ Truyền Tin, để làm phép và khánh thành Tòa Giám Mục.</p>
+
+            <h3 class="red-bold-uppercase">NHÀ THỜ CHÁNH TÒA</h3>
+            <p>Nhà thờ chánh tòa Mỹ Tho hiện tại là ngôi nhà thờ thứ ba của họ đạo Mỹ Tho được khởi công xây dựng tại họ nhánh Vĩnh Tường ngày 11-8-1906 bởi Cha Resgnier (Cha Gẫm) ngay trước nhà thờ này, bên kia đại lộ Bourdais nay là đại lộ Hùng Vương. Đến năm 1910 công việc xây dựng nhà thờ được hoàn tất. Dịp năm Thánh 2000, Đức Giám Mục Giáo Phận Phao lô Bùi Văn Đọc đã cử hành Lễ Cung Hiến nhà thờ Chánh Tòa Mỹ Tho ngày 21 tháng 01 năm 2000 và chọn ngày Lễ Đức Mẹ Hồn Xác Lên Trời làm ngày lễ Bổn Mạng thứ 2 của nhà thờ.</p>
+
+            <h3 class="red-bold-uppercase">TĂNG TRIỂN</h3>
+            <p>Khi thành lập vào năm 1960, giáo phận Mỹ Tho có 39 giáo xứ (không kể giáo họ), 32 nhà thờ, 54 nhà nguyện; có 50.249 giáo dân, 43 Linh Mục, 28 đại chủng sinh học tại Giáo hoàng Học viện Piô X Đà Lạt và Đại chủng viện Sài Gòn, 77 tiểu chủng sinh học ở Cần Thơ và Sài Gòn.</p>
+            <p>Đến trước năm 1975, giáo phận Mỹ Tho có 63.158 giáo dân (chiếm 3.8% dân số), 41 giáo xứ, 45 giáo họ và giáo điểm, 61 Linh Mục, 78 đại chủng sinh, 186 nữ tu; 88 trường trung tiểu học và 4 cơ sở từ thiện xã hội.</p>
+            <p>Hiện nay giáo phận Mỹ Tho phân chia thành 6 giáo hạt: Mỹ Tho và Cái Bè thuộc tỉnh Tiền Giang, Tân An, và Đức Hòa thuộc Long An, Cao Lãnh và Cù Lao Tây thuộc Đồng Tháp.</p>
+            <p>Theo thống kê của giáo phận năm 2009 số giáo dân hiện nay là 121.863 so với dân số 4.252.698 chiếm tỷ lệ 2.47% dân số của cả ba tỉnh, 119 Linh Mục; 248 tu sĩ đang phục vụ tại các cộng đoàn hoặc họ đạo.</p>
+            <p><strong> Từ ngày thành lập cho đến nay, Giáo Phận Mỹ Tho đã có 4 Đức Giám Mục Chánh Tòa và 1 Đức Giám Mục phó coi sóc:</strong></p>
+            <p>1960 – 1989: Đức Cha Giuse Trần Văn Thiện</p>
+            <p>1989 – 1999: Đức Cha Anrê Nguyễn Văn Nam</p>
+            <p>1993 – 1998: Đức Cha Phó Gioan Baotixita Phạm Minh Mẫn</p>
+            <p>1999 – 2014: Đức Cha Phaolô Bùi Văn Đọc</p>
+            <p>2014 – nay: Đức Cha Phêrô Nguyễn Văn Khảm</p>
+            <p>(Trích Kỷ yếu 50 năm Giáo phận Mỹ Tho năm 2010)</p>
+        </div>
+    </div>
+    <div class="footer">
+        <p class="highlight">Bản quyền © 2024 - Xứ Đoàn Các Thánh Tử Đạo Việt Nam</p>
+        <p>Giáo Xứ Chánh Tòa Mỹ Tho - Giáo Phận Mỹ Tho - Việt Nam</p>
+        <p class="contact">Địa chỉ: 32 Hùng Vương, Phường 7, Thành phố Mỹ Tho, Tỉnh Tiền Giang</p>
+        <p>Thiết kế bởi: <span class="highlight">Ban Truyền Thông & Ban Kỹ Thuật</span> - Trưởng Pr.Le.G.Huy</p>
+        <nav class="nav-bar">
+            <ul class="footer-nav">
+                <li><a href="index.html">Quay Lại</a></li>
+            </ul>
+        </nav>
+    </div>
+</body>
+</html>
