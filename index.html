@@ -2,12 +2,14 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="description" content="Hệ Thống Xứ Đoàn Các Thánh Tử Đạo Việt Nam - Giáo Xứ Chánh Tòa Mỹ Tho, cung cấp thông tin, tin tức và hoạt động của giáo xứ.">
+    <meta name="keywords" content="Xứ Đoàn, Giáo Xứ Chánh Tòa Mỹ Tho, Các Thánh Tử Đạo Việt Nam, Giáo Phận Mỹ Tho, tin tức giáo hội">
     <title>Hệ Thống Giáo Xứ Chánh Tòa Mỹ Tho</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <script src="https://unpkg.com/papaparse@latest/papaparse.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script defer src="https://unpkg.com/papaparse@latest/papaparse.min.js"></script>
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -337,16 +339,51 @@
             font-size: 0.85rem;
             color: #D1D5DB;
         }
-        
-        @media screen and (max-width: 1024px) and (min-width: 150px)
-        {
+        .live-music-bar {
+            background-color: #FFFFFF;
+            padding: 0.2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .live-music-bar h3 {
+            font-family: 'Merriweather', serif;
+            font-size: 1.25rem;
+            color: #A6192E;
+            margin: 0;
+        }
+        .live-music-bar button {
+            background-color: #A6192E;
+            color: #FFFFFF;
+            padding: 0.3rem;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s, box-shadow 0.2s;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .live-music-bar button:hover {
+            background-color: #8B1625;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        .live-music-bar input[type="range"] {
+            width: 100px;
+            accent-color: #A6192E;
+        }
+        @media screen and (max-width: 1024px) {
             .nav-bar ul {
                 flex-direction: row;
                 overflow-x: auto;
                 white-space: nowrap;
             }
         }
-        
         @media (max-width: 1024px) {
             .container {
                 flex-direction: column;
@@ -370,10 +407,12 @@
                 right: 15px;
                 width: 50px;
                 height: 50px;
-                font-size: 0.9rem;
+                font-size: 0.5rem;
+            }
+            .live-music-bar input[type="range"] {
+                width: 80px;
             }
         }
-
         @media (max-width: 800px) {
             .header h1 {
                 font-size: 1.5rem;
@@ -436,8 +475,10 @@
                 height: 45px;
                 font-size: 0.85rem;
             }
+            .live-music-bar input[type="range"] {
+                width: 80px;
+            }
         }
-
         @media (max-width: 576px) {
             .header h1 {
                 font-size: 1.25rem;
@@ -520,8 +561,10 @@
                 height: 40px;
                 font-size: 0.8rem;
             }
+            .live-music-bar input[type="range"] {
+                width: 60px;
+            }
         }
-
         @media (max-width: 400px) {
             .header h1 {
                 font-size: 1.1rem;
@@ -569,6 +612,9 @@
                 height: 35px;
                 font-size: 0.75rem;
             }
+            .live-music-bar input[type="range"] {
+                width: 50px;
+            }
         }
     </style>
 </head>
@@ -579,14 +625,20 @@
     </div>
     <nav class="nav-bar">
         <ul>
-            <!-- <li><a href="report.html">GỬI PHẢN HỒI</a></li>
-            <li><a href="aaw.html">THẮC MẮC</a></li> -->
             <li><a href="info.html">THÔNG TIN</a></li>
             <li><a href="mass.html">GIỜ LỄ</a></li>
             <li><a href="library.html">THƯ VIỆN</a></li>
             <li><a href="https://m.me/tnttchanhtoamytho" target="_blank">NHẮN TIN</a></li>
         </ul>
     </nav>
+
+    <audio id="liveAudio" src="https://radio.vaticannews.va/stream-vi" preload="none"></audio>
+
+    <div class="live-music-bar">
+        <h3>Radio - Vatican News Tiếng Việt</h3>
+        <input type="range" id="volumeSlider" min="0" max="100" value="50">
+        <button id="playPauseBtn"><i class="fas fa-play"></i></button>
+    </div>
     <a href="aaq.html" class="floating-btn">Hỏi Đáp</a>
     <div class="container">
         <div class="main-content">
@@ -594,20 +646,20 @@
             <div class="carousel">
                 <div class="carousel-inner" id="carouselInner">
                     <div class="carousel-item">
-                        <img src="assets/pope_leo_xiv.jpg" alt="Đức Tân Giáo Hoàng Leo XIV">
+                        <img src="assets/pope_leo_xiv.jpg" alt="Đức Tân Giáo Hoàng Leo XIV" loading="lazy">
                         <div class="carousel-caption">Tin tức Giáo Hội</div>
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/Thang5_MC.png" alt="Tháng 5 - Tháng Mân Côi">
+                        <img src="assets/Thang5_MC.png" alt="Tháng 5 - Tháng Mân Côi" loading="lazy">
                         <div class="carousel-caption">Tháng Mân Côi</div>
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/Hoat_dong_xu_doan.png" alt="Hoạt động Xứ Đoàn">
+                        <img src="assets/Hoat_dong_xu_doan.png" alt="Hoạt động Xứ Đoàn" loading="lazy">
                         <div class="carousel-caption">Hoạt động Xứ Đoàn</div>
                     </div>
                 </div>
-                <button class="carousel-btn prev" onclick="moveSlide(-1)">❮</button>
-                <button class="carousel-btn next" onclick="moveSlide(1)">❯</button>
+                <button class="carousel-btn prev" onclick="moveSlide(-1)" aria-label="Chuyển đến slide trước">❮</button>
+                <button class="carousel-btn next" onclick="moveSlide(1)" aria-label="Chuyển đến slide tiếp theo">❯</button>
             </div>
             <div class="video-section">
                 <h3 class="font-semibold text-lg mb-4">Video</h3>
@@ -625,7 +677,7 @@
                     <p>Đang tải thông tin...</p>
                 </div>
                 <div class="info-image">
-                    <img src="assets/pope_leo_xiv.jpg" alt="Đức Giáo Hoàng Leo XIV">
+                    <img src="assets/pope_leo_xiv.jpg" alt="Đức Tân Giáo Hoàng Leo XIV" loading="lazy">
                     <div class="image-caption">ĐỨC GIÁO HOÀNG LEO XIV</div>
                 </div>
             </div>
@@ -649,93 +701,145 @@
         </div>
         <p>Thiết kế bởi: <span class="highlight">Ban Truyền Thông & Ban Kỹ Thuật - Trưởng Pr.Le.G.Huy</span></p>
     </div>
-    <script>
-        // CSV Fetch Script for Info Box
-        fetch('data/text.csv')
-            .then(response => {
-                if (!response.ok) throw new Error('Không tìm thấy file text.csv');
-                return response.text();
-            })
-            .then(data => {
-                const infoContent = document.getElementById('infoContent');
-                const textDiv = infoContent.querySelector('.info-text');
-                textDiv.innerHTML = '';
-                const rows = data.split('\n').filter(row => row.trim() !== '');
-                if (rows.length === 0) {
-                    textDiv.innerHTML = '<p>Không có thông tin để hiển thị.</p>';
-                } else {
-                    rows.forEach(row => {
-                        const text = row.trim().replace(/^"|"$/g, '');
-                        if (text) {
-                            const p = document.createElement('p');
-                            p.textContent = text;
-                            textDiv.appendChild(p);
-                        }
+    <script defer>
+        // Audio controls
+        function setupAudioControls() {
+            const audio = document.getElementById('liveAudio');
+            const playPauseBtn = document.getElementById('playPauseBtn');
+            const volumeSlider = document.getElementById('volumeSlider');
+
+            // Set initial volume
+            audio.volume = volumeSlider.value / 100;
+
+            // Play/Pause toggle
+            playPauseBtn.addEventListener('click', () => {
+                if (audio.paused) {
+                    audio.play().catch(err => {
+                        console.error('Lỗi phát âm thanh:', err);
                     });
+                    playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                } else {
+                    audio.pause();
+                    playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
                 }
-            })
-            .catch(error => {
-                console.error('Lỗi khi tải text.csv:', error);
-                const textDiv = document.getElementById('infoContent').querySelector('.info-text');
-                textDiv.innerHTML = '<p>Không thể tải thông tin. Vui lòng kiểm tra file text.csv hoặc chạy qua server cục bộ (ví dụ: python -m http.server).</p>';
             });
 
-        // CSV Fetch Script for News Section (Only display titles)
-        fetch('data/news.csv')
-            .then(response => {
-                if (!response.ok) throw new Error('Không tìm thấy file news.csv');
-                return response.text();
-            })
-            .then(data => {
-                Papa.parse(data, {
-                    header: true,
-                    skipEmptyLines: true,
-                    encoding: 'UTF-8',
-                    complete: (result) => {
-                        const newsContent = document.getElementById('newsContent');
-                        newsContent.innerHTML = '<h3 class="font-semibold text-lg mb-4">Tin Tức Mới Nhất</h3>';
-                        const articles = result.data;
-
-                        if (!articles || articles.length === 0) {
-                            newsContent.innerHTML += '<p>Không có tin tức để hiển thị.</p>';
-                        } else {
-                            articles.forEach((article, index) => {
-                                const title = article.title || 'Không có tiêu đề';
-                                if (title) {
-                                    const card = document.createElement('div');
-                                    card.className = 'news-card';
-                                    card.innerHTML = `<h3><a href="news.html?id=${index}">${title}</a></h3>`;
-                                    newsContent.appendChild(card);
-                                }
-                            });
-                        }
-                    },
-                    error: (err) => {
-                        console.error('Lỗi khi phân tích news.csv:', err);
-                        const newsContent = document.getElementById('newsContent');
-                        newsContent.innerHTML = '<h3 class="font-semibold text-lg mb-4">Tin Tức Mới Nhất</h3><p>Không thể tải tin tức. Vui lòng kiểm tra file news.csv hoặc chạy qua server cục bộ (ví dụ: python -m http.server).</p>';
-                    }
-                });
-            })
-            .catch(error => {
-                console.error('Lỗi khi tải news.csv:', error);
-                const newsContent = document.getElementById('newsContent');
-                newsContent.innerHTML = '<h3 class="font-semibold text-lg mb-4">Tin Tức Mới Nhất</h3><p>Không thể tải tin tức. Vui lòng kiểm tra file news.csv hoặc chạy qua server cục bộ (ví dụ: python -m http.server).</p>';
+            // Volume control
+            volumeSlider.addEventListener('input', () => {
+                audio.volume = volumeSlider.value / 100;
             });
 
-        // Carousel Script
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.carousel-item');
-        const totalSlides = slides.length;
-
-        function moveSlide(direction) {
-            currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
-            const carouselInner = document.getElementById('carouselInner');
-            carouselInner.style.transform = `translateX(-${currentSlide * 100}%)`;
+            // Handle audio errors
+            audio.addEventListener('error', () => {
+                console.error('Lỗi tải radio.');
+            });
         }
 
-        // Auto-slide every 5 seconds
-        setInterval(() => moveSlide(1), 5000);
+        // Load info from CSV
+        function loadInfo() {
+            fetch('data/text.csv')
+                .then(response => {
+                    if (!response.ok) throw new Error('Không tìm thấy file text.csv');
+                    return response.text();
+                })
+                .then(data => {
+                    const infoContent = document.getElementById('infoContent');
+                    const textDiv = infoContent.querySelector('.info-text');
+                    textDiv.innerHTML = '<h3 class="font-semibold text-lg mb-4">Thông tin</h3>';
+                    const rows = data.split('\n').filter(row => row.trim() !== '');
+                    if (rows.length === 0) {
+                        textDiv.innerHTML += '<p>Không có thông tin để hiển thị.</p>';
+                    } else {
+                        rows.forEach(row => {
+                            const text = row.trim().replace(/^"|"$/g, '');
+                            if (text) {
+                                const p = document.createElement('p');
+                                p.textContent = text;
+                                textDiv.appendChild(p);
+                            }
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Lỗi khi tải text.csv:', error);
+                    const textDiv = document.getElementById('infoContent').querySelector('.info-text');
+                    textDiv.innerHTML = '<h3 class="font-semibold text-lg mb-4">Thông tin</h3><p>Không thể tải thông tin. Vui lòng thử lại sau.</p>';
+                });
+        }
+
+        // Load news from CSV
+        function loadNews() {
+            fetch('data/news.csv')
+                .then(response => {
+                    if (!response.ok) throw new Error('Không tìm thấy file news.csv');
+                    return response.text();
+                })
+                .then(data => {
+                    Papa.parse(data, {
+                        header: true,
+                        skipEmptyLines: true,
+                        encoding: 'UTF-8',
+                        complete: (result) => {
+                            const newsContent = document.getElementById('newsContent');
+                            newsContent.innerHTML = '<h3 class="font-semibold text-lg mb-4">Tin Tức Mới Nhất</h3>';
+                            const articles = result.data;
+
+                            if (!articles || articles.length === 0) {
+                                newsContent.innerHTML += '<p>Không có tin tức để hiển thị.</p>';
+                            } else {
+                                articles.forEach((article, index) => {
+                                    const title = article.title || 'Không có tiêu đề';
+                                    if (title) {
+                                        const card = document.createElement('div');
+                                        card.className = 'news-card';
+                                        card.innerHTML = `<h3><a href="news.html?id=${index}">${title}</a></h3>`;
+                                        newsContent.appendChild(card);
+                                    }
+                                });
+                            }
+                        },
+                        error: (err) => {
+                            console.error('Lỗi khi phân tích news.csv:', err);
+                            const newsContent = document.getElementById('newsContent');
+                            newsContent.innerHTML = '<h3 class="font-semibold text-lg mb-4">Tin Tức Mới Nhất</h3><p>Không thể tải tin tức. Vui lòng thử lại sau.</p>';
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.error('Lỗi khi tải news.csv:', error);
+                    const newsContent = document.getElementById('newsContent');
+                    newsContent.innerHTML = '<h3 class="font-semibold text-lg mb-4">Tin Tức Mới Nhất</h3><p>Không thể tải tin tức. Vui lòng thử lại sau.</p>';
+                });
+        }
+
+        // Carousel controls
+        function setupCarousel() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.carousel-item');
+            const totalSlides = slides.length;
+
+            if (totalSlides === 0) {
+                console.warn('Không có slide nào trong carousel.');
+                return;
+            }
+
+            function moveSlide(direction) {
+                currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+                const carouselInner = document.getElementById('carouselInner');
+                carouselInner.style.transform = `translateX(-${currentSlide * 100}%)`;
+            }
+
+            setInterval(() => moveSlide(1), 5000);
+            window.moveSlide = moveSlide;
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            setupAudioControls();
+            loadInfo();
+            loadNews();
+            setupCarousel();
+        });
     </script>
 </body>
 </html>
