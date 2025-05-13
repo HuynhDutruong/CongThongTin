@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kinh Nguyện - Giáo Xứ Chánh Tòa Mỹ Tho</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://unpkg.com/papaparse@latest/papaparse.min.js"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #F5F5F5;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: #1A1A1A;
+        }
+        .header {
+            background-color: #A6192E;
+            color: #FFFFFF;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .header h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+        .header p {
+            font-size: 1rem;
+        }
+        .nav-bar {
+            background-color: #1A1A1A;
+            padding: 0.75rem 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .nav-bar ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+        }
+        .nav-bar li {
+            margin: 0 1.5rem;
+        }
+        .nav-bar a {
+            color: #FFFFFF;
+            text-decoration: none;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+        .nav-bar a:hover {
+            color: #FFD700;
+            text-shadow: 0 0 8px rgba(255, 215, 0, 0.8);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            flex: 1;
+        }
+        .search-section {
+            background: #FFFFFF;
+            border: 1px solid #D3D3D3;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .search-section h2 {
+            font-family: 'Merriweather', serif;
+            font-size: 1.5rem;
+            color: #A6192E;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .search-section select {
+            width: 100%;
+            max-width: 400px;
+            padding: 0.5rem;
+            border-radius: 4px;
+            border: 1px solid #D1D5DB;
+            margin: 0 auto;
+            display: block;
+            font-family: 'Roboto', sans-serif;
+        }
+        .search-section select:focus {
+            outline: 2px solid #A6192E;
+            outline-offset: 2px;
+        }
+        .prayer-display {
+            background: #F8F1E9;
+            border: 2px solid #8B5A2B;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), inset 0 0 10px rgba(139, 90, 43, 0.2);
+        }
+        .prayer-display h2 {
+            font-family: 'Merriweather', serif;
+            font-size: 1.5rem;
+            color: #5C4033;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-style: italic;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        .prayer-display p {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+            color: #3A2E2E;
+            line-height: 1.6;
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+        .prayer-display ul {
+            list-style-type: disc;
+            padding-left: 2rem;
+            margin-bottom: 1rem;
+        }
+        .prayer-display li {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+            color: #3A2E2E;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+        .prayer-display h3 {
+            font-family: 'Merriweather', serif;
+            font-size: 1.25rem;
+            color: #5C4033;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+        .footer {
+            background-color: #1A1A1A;
+            color: #FFFFFF;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.2);
+            margin-top: auto;
+        }
+        .footer .social-icons {
+            margin: 1rem 0;
+        }
+        .footer .social-icons a {
+            color: #FFFFFF;
+            font-size: 1.5rem;
+            margin: 0 0.75rem;
+            transition: color 0.2s;
+        }
+        .footer .social-icons a:hover {
+            color: #FFD700;
+        }
+        .highlight {
+            color: #FFD700;
+            font-weight: 500;
+        }
+        .contact {
+            font-size: 0.9rem;
+            color: #D1D5DB;
+        }
+        .back-btn {
+            display: inline-block;
+            background-color: #A6192E;
+            color: #FFFFFF;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.2s;
+            margin-bottom: 1rem;
+        }
+        .back-btn:hover {
+            background-color: #8B1625;
+        }
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            .nav-bar ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            .nav-bar li {
+                margin: 0.5rem 0;
+            }
+            .search-section h2, .prayer-display h2 {
+                font-size: 1.25rem;
+            }
+            .prayer-display p, .prayer-display li {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>XỨ ĐOÀN CÁC THÁNH TỬ ĐẠO VIỆT NAM</h1>
+        <p>Giáo Xứ Chánh Tòa Mỹ Tho</p>
+    </div>
+    <nav class="nav-bar">
+        <ul>
+    </nav>
+    <div class="container">
+        <a href="library.html" class="back-btn">Quay Lại Thư Viện</a>
+        <div class="search-section">
+            <h2>Chọn Kinh Nguyện</h2>
+            <select id="prayerSelect" onchange="displayPrayer()">
+                <option value="" disabled selected>Chọn Kinh Nguyện</option>
+            </select>
+        </div>
+        <div class="prayer-display" id="prayerDisplay" style="display: none;">
+            <h2 id="prayerTitle">Kinh Nguyện</h2>
+            <div id="prayerContent"></div>
+        </div>
+    </div>
+    <div class="footer">
+        <p class="highlight">Bản quyền © 2024 - Xứ Đoàn Các Thánh Tử Đạo Việt Nam</p>
+        <p>Giáo Xứ Chánh Tòa Mỹ Tho - Giáo Phận Mỹ Tho - Việt Nam</p>
+        <p class="contact">Địa chỉ: 32 Hùng Vương, Phường 1, Thành phố Mỹ Tho, Tỉnh Tiền Giang</p>
+        <div class="social-icons">
+            <a href="https://www.facebook.com/tnttchanhtoamytho/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://m.me/tnttchanhtoamytho" target="_blank"><i class="fab fa-facebook-messenger"></i></a>
+        </div>
+        <p>Thiết kế bởi: <span class="highlight">Ban Truyền Thông & Ban Kỹ Thuật - Trưởng Pr.Le.G.Huy</span></p>
+    </div>
+    <script>
+        let prayers = [];
+
+        // Hàm lấy dữ liệu từ file pray.csv
+        async function fetchCSVData() {
+            try {
+                const response = await fetch('data/pray.csv');
+                if (!response.ok) throw new Error('Không tìm thấy file pray.csv');
+                const text = await response.text();
+                Papa.parse(text, {
+                    header: true,
+                    skipEmptyLines: true,
+                    encoding: 'UTF-8',
+                    complete: (result) => {
+                        prayers = result.data;
+                        console.log('Dữ liệu từ pray.csv:', prayers); // Debug toàn bộ dữ liệu
+
+                        // Điền dữ liệu vào dropdown
+                        const prayerSelect = document.getElementById('prayerSelect');
+                        prayers.forEach(prayer => {
+                            const option = document.createElement('option');
+                            option.value = prayer.title;
+                            option.textContent = prayer.title;
+                            prayerSelect.appendChild(option);
+                        });
+                    },
+                    error: (err) => {
+                        console.error('Lỗi khi phân tích pray.csv:', err);
+                        alert('Không thể tải dữ liệu từ pray.csv. Vui lòng kiểm tra file hoặc chạy qua server cục bộ (ví dụ: python -m http.server).');
+                    }
+                });
+            } catch (error) {
+                console.error('Lỗi khi tải pray.csv:', error);
+                alert('Không thể tải dữ liệu từ pray.csv. Vui lòng kiểm tra file hoặc chạy qua server cục bộ (ví dụ: python -m http.server).');
+            }
+        }
+
+        // Hàm định dạng nội dung kinh
+        function formatPrayerContent(content) {
+            if (!content) return '<p>Nội dung không khả dụng.</p>';
+
+            // Thay thế \n bằng <br> trước khi xử lý danh sách
+            let formattedContent = content.replace(/\n/g, '<br>');
+            const lines = formattedContent.split('<br>').map(line => line.trim());
+
+            let html = '';
+            let inList = false;
+
+            lines.forEach(line => {
+                if (!line) {
+                    if (inList) {
+                        html += '</ul>';
+                        inList = false;
+                    }
+                    html += '<p>&nbsp;</p>'; // Khoảng cách
+                    return;
+                }
+
+                // Phát hiện gạch đầu dòng (dấu - hoặc + hoặc "Thứ [số] thì ngắm")
+                if (/^[-+]\s/.test(line) || /^Thứ\s+\w+\s+thì\s+ngắm:/.test(line)) {
+                    if (!inList) {
+                        html += '<ul>';
+                        inList = true;
+                    }
+                    html += `<li>${line.replace(/^[-+]\s/, '').replace(/^Thứ\s+\w+\s+thì\s+ngắm:/, '')}</li>`;
+                } else if (inList && !/^[-+]\s/.test(line) && !/^Thứ\s+\w+\s+thì\s+ngắm:/.test(line)) {
+                    html += '</ul>';
+                    inList = false;
+                    html += `<p>${line}</p>`;
+                } else if (/^\*\*.*\*\*$/.test(line)) {
+                    if (inList) {
+                        html += '</ul>';
+                        inList = false;
+                    }
+                    html += `<h3>${line.replace(/\*\*/g, '')}</h3>`;
+                } else {
+                    if (!inList) {
+                        html += `<p>${line}</p>`;
+                    }
+                }
+            });
+
+            if (inList) html += '</ul>';
+            console.log('Nội dung đã định dạng:', html); // Debug nội dung đã định dạng
+            return html;
+        }
+
+        // Hàm hiển thị nội dung kinh
+        function displayPrayer() {
+            const prayerSelect = document.getElementById('prayerSelect');
+            const prayerDisplay = document.getElementById('prayerDisplay');
+            const prayerTitle = document.getElementById('prayerTitle');
+            const prayerContent = document.getElementById('prayerContent');
+
+            const selectedPrayerTitle = prayerSelect.value;
+
+            if (!selectedPrayerTitle) {
+                prayerDisplay.style.display = 'none';
+                return;
+            }
+
+            const selectedPrayer = prayers.find(prayer => prayer.title === selectedPrayerTitle);
+            if (selectedPrayer) {
+                prayerDisplay.style.display = 'block';
+                prayerTitle.textContent = selectedPrayer.title;
+                prayerContent.innerHTML = formatPrayerContent(selectedPrayer.content);
+            } else {
+                prayerDisplay.style.display = 'block';
+                prayerTitle.textContent = 'Không Tìm Thấy Kinh';
+                prayerContent.innerHTML = '<p>Không có nội dung cho kinh này.</p>';
+            }
+        }
+
+        // Tải dữ liệu khi trang được tải
+        window.onload = fetchCSVData;
+    </script>
+</body>
+</html>

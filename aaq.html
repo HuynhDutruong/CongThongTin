@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hỏi và Đáp</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #F5F5F5;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: #1A1A1A;
+        }
+        .header {
+            background-color: #A6192E;
+            color: #FFFFFF;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+        .header h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+        .header p {
+            font-size: 1rem;
+        }
+        .container {
+            max-width: 800px;
+            margin: 1.5rem auto;
+            padding: 0 1rem;
+            flex: 1;
+        }
+        .footer {
+            background-color: #1A1A1A;
+            color: #FFFFFF;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.2);
+            margin-top: auto;
+        }
+        .highlight {
+            color: #FFD700;
+            font-weight: 500;
+        }
+        .contact {
+            font-size: 0.9rem;
+            color: #D1D5DB;
+        }
+        .tab-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .tab-button {
+            display: inline-block;
+            background-color: #A6192E;
+            color: #FFFFFF;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            text-align: center;
+            margin-bottom: 1rem;
+            transition: background-color 0.3s, box-shadow 0.2s;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .tab-button:hover {
+            background-color: #8B1625;
+        }
+        .tab-button.active {
+            background-color: #FFD700;
+            color: #1A1A1A;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .form-container {
+            background: #FFFFFF;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+        .form-container h2 {
+            font-family: 'Merriweather', serif;
+            font-size: 1.25rem;
+            color: #A6192E;
+            margin-bottom: 1rem;
+        }
+        .form-container label {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 500;
+            color: #1A1A1A;
+            margin-bottom: 0.25rem;
+            display: block;
+        }
+        input[type="file"],
+        input[type="text"],
+        input[type="email"],
+        input[type="date"],
+        textarea,
+        input[type="radio"] + label {
+            padding: 0.5rem;
+            border: 1px solid #D1D5DB;
+            border-radius: 4px;
+            width: 100%;
+            margin-bottom: 0.5rem;
+            font-family: 'Roboto', sans-serif;
+            font-size: 0.875rem;
+            color: #1A1A1A;
+        }
+        .file-limit-message {
+            font-size: 0.9rem;
+            color: #6B7280;
+            margin-bottom: 0.5rem;
+        }
+        .error-message {
+            color: #DC2626;
+            font-size: 0.9rem;
+            display: none;
+            margin-bottom: 0.5rem;
+        }
+        .file-list {
+            margin-bottom: 1rem;
+        }
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem;
+            border-bottom: 1px solid #E5E7EB;
+        }
+        .remove-file {
+            color: #DC2626;
+            cursor: pointer;
+        }
+        .loading {
+            display: none;
+            color: #2563EB;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        .form-container button[type="submit"] {
+            background-color: #A6192E;
+            color: #FFFFFF;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            border: none;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 500;
+            transition: background-color 0.2s, box-shadow 0.2s;
+        }
+        .form-container button[type="submit"]:hover {
+            background-color: #8B1625;
+            box-shadow: 0 0 8px #FFD700;
+        }
+        #classField {
+            display: none;
+        }
+        .back-btn {
+            display: inline-block;
+            background-color: #A6192E;
+            color: #FFFFFF;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            text-align: center;
+            margin-bottom: 1rem;
+            transition: background-color 0.3s, box-shadow 0.2s;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 500;
+        }
+        .back-btn:hover {
+            background-color: #8B1625;
+            box-shadow: 0 0 8px #FFD700;
+        }
+        .back-btn:focus {
+            outline: 2px solid #FFD700;
+            outline-offset: 2px;
+        }
+        @media (max-width: 640px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            .header p {
+                font-size: 0.875rem;
+            }
+            .form-container {
+                padding: 1rem;
+            }
+            .form-container h2 {
+                font-size: 1.125rem;
+            }
+            .tab-buttons {
+                flex-direction: column;
+            }
+            .tab-button {
+                width: 100%;
+                margin-bottom: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Hỏi và Đáp</h1>
+        <p>Giáo Xứ Chánh Tòa Mỹ Tho</p>
+    </div>
+    <div class="container">
+        <div class="tab-buttons">
+            <button onclick="history.back()" class="back-btn">Quay Lại</button>
+            <button class="tab-button active" onclick="openTab('thacMac')">Thắc Mắc</button>
+            <button class="tab-button" onclick="openTab('phanHoi')">Phản Hồi</button>
+        </div>
+        <div id="thacMac" class="tab-content active">
+            <form id="queryForm" action="https://formsubmit.co/notification2411.huynhdutruong@gmail.com" method="POST" enctype="multipart/form-data" class="form-container">
+                <h2>Thắc Mắc</h2>
+                <div class="mb-4">
+                    <label>Họ và tên (Tên Thánh):</label>
+                    <input type="text" name="name" required>
+                </div>
+                <div class="mb-4">
+                    <label>Gmail nhận giải đáp:</label>
+                    <input type="email" name="email" required>
+                </div>
+                <div class="mb-4">
+                    <label>Vấn đề thắc mắc (dưới 300 chữ):</label>
+                    <textarea name="question" maxlength="300" required></textarea>
+                </div>
+                <div class="mb-4">
+                    <label>Tải lên hình ảnh hoặc tài liệu (nếu có, tối đa 6 tệp, định dạng .pdf, .png, .docx):</label>
+                    <p class="file-limit-message">Mỗi tệp tối đa 2MB, tổng cộng không vượt quá 10MB.</p>
+                    <p id="error-message-thacmac" class="error-message">Vui lòng chọn tối đa 6 tệp hoặc kiểm tra dung lượng tệp.</p>
+                    <input type="file" name="attachment[]" id="fileInputThacMac" accept=".pdf,.png,.docx" multiple>
+                    <div id="fileListThacMac" class="file-list"></div>
+                </div>
+                <button type="submit">Nộp</button>
+                <div id="loading-thacmac" class="loading">Đang gửi...</div>
+                <input type="hidden" name="_subject" value="Thắc Mắc Mới">
+                <input type="hidden" name="_next" value="http://yourdomain.com/thank-you.html">
+            </form>
+        </div>
+        <div id="phanHoi" class="tab-content">
+            <form id="feedbackForm" action="https://formsubmit.co/notification2411.huynhdutruong@gmail.com" method="POST" enctype="multipart/form-data" class="form-container">
+                <h2>Kính gửi: Đại Diện Đoàn TNTT Giáo Xứ Chánh Tòa Mỹ Tho</h2>
+                <div class="mb-4">
+                    <label>Họ và tên (Tên Thánh):</label>
+                    <input type="text" name="name" required>
+                </div>
+                <div class="mb-4">
+                    <label>Ngày/tháng/năm sinh:</label>
+                    <input type="date" name="dob" required>
+                </div>
+                <div class="mb-4">
+                    <label>Đối tượng:</label>
+                    <input type="radio" name="role" value="Phụ Huynh" required> Phụ Huynh
+                    <input type="radio" name="role" value="Thiếu Nhi" id="child"> Thiếu Nhi
+                    <input type="radio" name="role" value="Khác"> Khác
+                </div>
+                <div class="mb-4" id="classField">
+                    <label>Lớp:</label>
+                    <input type="text" name="class">
+                </div>
+                <div class="mb-4">
+                    <label>Phản hồi (dưới 300 chữ):</label>
+                    <textarea name="feedback" maxlength="300" required></textarea>
+                </div>
+                <div class="mb-4">
+                    <label>Tải lên hình ảnh hoặc tài liệu (nếu có, tối đa 6 tệp, định dạng .pdf, .png, .docx):</label>
+                    <p class="file-limit-message">Mỗi tệp tối đa 2MB, tổng cộng không vượt quá 10MB.</p>
+                    <p id="error-message-phanhoi" class="error-message">Vui lòng chọn tối đa 6 tệp hoặc kiểm tra dung lượng tệp.</p>
+                    <input type="file" name="attachment[]" id="fileInputPhanHoi" accept=".pdf,.png,.docx" multiple>
+                    <div id="fileListPhanHoi" class="file-list"></div>
+                </div>
+                <div class="mb-4">
+                    <input type="checkbox" name="confirm" required> Tôi xác nhận thông tin trên là chính xác
+                </div>
+                <button type="submit">Nộp</button>
+                <div id="loading-phanhoi" class="loading">Đang gửi...</div>
+                <input type="hidden" name="_subject" value="Phản Hồi Mới">
+                <input type="hidden" name="_next" value="http://yourdomain.com/thank-you.html">
+            </form>
+        </div>
+    </div>
+    <div class="footer">
+        <p class="highlight">Bản quyền © 2024 - Xứ Đoàn Các Thánh Tử Đạo Việt Nam</p>
+        <p>Giáo Xứ Chánh Tòa Mỹ Tho - Giáo Phận Mỹ Tho - Việt Nam</p>
+        <p class="contact">Địa chỉ: 32 Hùng Vương, Phường 7, Thành phố Mỹ Tho, Tỉnh Tiền Giang</p>
+        <p>Thiết kế bởi: <span class="highlight">Ban Truyền Thông & Ban Kỹ Thuật</span> - Trưởng Pr.Le.G.Huy</p>
+    </div>
+    <script>
+        function openTab(tabName) {
+            document.querySelectorAll('.tab-button').forEach(button => button.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.querySelector(`.tab-button[onclick="openTab('${tabName}')"]`).classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+
+        // File handling for Thắc Mắc
+        const fileInputThacMac = document.getElementById('fileInputThacMac');
+        const fileListThacMac = document.getElementById('fileListThacMac');
+        const errorMessageThacMac = document.getElementById('error-message-thacmac');
+        const queryForm = document.getElementById('queryForm');
+        const loadingThacMac = document.getElementById('loading-thacmac');
+
+        fileInputThacMac.addEventListener('change', function() {
+            fileListThacMac.innerHTML = '';
+            const files = Array.from(this.files);
+            let totalSize = 0;
+            const maxFiles = 6;
+            const maxFileSizeMB = 2;
+            const maxTotalSizeMB = 10;
+
+            files.forEach(file => totalSize += file.size / (1024 * 1024));
+
+            if (files.length > maxFiles || totalSize > maxTotalSizeMB || files.some(file => file.size / (1024 * 1024) > maxFileSizeMB)) {
+                errorMessageThacMac.style.display = 'block';
+                this.value = '';
+                fileListThacMac.innerHTML = '';
+                return;
+            } else {
+                errorMessageThacMac.style.display = 'none';
+            }
+
+            files.forEach((file, index) => {
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item';
+                fileItem.innerHTML = `<span>${file.name} (${(file.size / 1024).toFixed(2)} KB)</span><span class="remove-file" data-index="${index}">Xóa</span>`;
+                fileListThacMac.appendChild(fileItem);
+            });
+
+            fileListThacMac.querySelectorAll('.remove-file').forEach(button => {
+                button.addEventListener('click', function() {
+                    const index = this.getAttribute('data-index');
+                    const newFiles = files.filter((_, i) => i !== parseInt(index));
+                    const dt = new DataTransfer();
+                    newFiles.forEach(file => dt.items.add(file));
+                    fileInputThacMac.files = dt.files;
+                    fileInputThacMac.dispatchEvent(new Event('change'));
+                });
+            });
+        });
+
+        queryForm.addEventListener('submit', function(e) {
+            loadingThacMac.style.display = 'block';
+            setTimeout(() => loadingThacMac.style.display = 'none', 2000); // Simulate submission
+        });
+
+        // File handling for Phản Hồi
+        const fileInputPhanHoi = document.getElementById('fileInputPhanHoi');
+        const fileListPhanHoi = document.getElementById('fileListPhanHoi');
+        const errorMessagePhanHoi = document.getElementById('error-message-phanhoi');
+        const feedbackForm = document.getElementById('feedbackForm');
+        const loadingPhanHoi = document.getElementById('loading-phanhoi');
+
+        fileInputPhanHoi.addEventListener('change', function() {
+            fileListPhanHoi.innerHTML = '';
+            const files = Array.from(this.files);
+            let totalSize = 0;
+            const maxFiles = 6;
+            const maxFileSizeMB = 2;
+            const maxTotalSizeMB = 10;
+
+            files.forEach(file => totalSize += file.size / (1024 * 1024));
+
+            if (files.length > maxFiles || totalSize > maxTotalSizeMB || files.some(file => file.size / (1024 * 1024) > maxFileSizeMB)) {
+                errorMessagePhanHoi.style.display = 'block';
+                this.value = '';
+                fileListPhanHoi.innerHTML = '';
+                return;
+            } else {
+                errorMessagePhanHoi.style.display = 'none';
+            }
+
+            files.forEach((file, index) => {
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item';
+                fileItem.innerHTML = `<span>${file.name} (${(file.size / 1024).toFixed(2)} KB)</span><span class="remove-file" data-index="${index}">Xóa</span>`;
+                fileListPhanHoi.appendChild(fileItem);
+            });
+
+            fileListPhanHoi.querySelectorAll('.remove-file').forEach(button => {
+                button.addEventListener('click', function() {
+                    const index = this.getAttribute('data-index');
+                    const newFiles = files.filter((_, i) => i !== parseInt(index));
+                    const dt = new DataTransfer();
+                    newFiles.forEach(file => dt.items.add(file));
+                    fileInputPhanHoi.files = dt.files;
+                    fileInputPhanHoi.dispatchEvent(new Event('change'));
+                });
+            });
+        });
+
+        feedbackForm.addEventListener('submit', function(e) {
+            loadingPhanHoi.style.display = 'block';
+            setTimeout(() => loadingPhanHoi.style.display = 'none', 2000); // Simulate submission
+        });
+
+        document.getElementById('child').addEventListener('change', function() {
+            document.getElementById('classField').style.display = this.checked ? 'block' : 'none';
+        });
+    </script>
+</body>
+</html>
