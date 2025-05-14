@@ -63,7 +63,7 @@
         .header h2 {
             font-family: 'Merriweather', serif;
             font-size: 1.75rem;
-            font-weight: 700;
+            font-weight: 500;
             margin-bottom: 0.25rem;
         }
         .header p {
@@ -168,6 +168,9 @@
             text-align: center;
             cursor: pointer;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         body.dark-mode .clock-box {
             background: #333;
@@ -182,7 +185,16 @@
             color: #1A3C5A;
             margin: 0;
         }
+        #weather {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+            color: #1A3C5A;
+            margin-top: 0.5rem;
+        }
         body.dark-mode #clock {
+            color: #A3C5E8;
+        }
+        body.dark-mode #weather {
             color: #A3C5E8;
         }
         .timeline-modal {
@@ -236,7 +248,7 @@
             color: #A6192E;
         }
         .mass-time.current {
-            color: #FFD700;
+            color: #FFEB3B;
             font-weight: bold;
         }
         .timeline-labels {
@@ -403,19 +415,6 @@
         .news-card a:hover {
             color: #FFD700;
         }
-        .news-card .share-btn {
-            background: #A6192E;
-            color: #FFFFFF;
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 0.5rem;
-            font-size: 0.9rem;
-        }
-        .news-card .share-btn:hover {
-            background: #8B1625;
-        }
         .pagination {
             display: flex;
             justify-content: center;
@@ -548,6 +547,9 @@
             color: #FFD700;
             font-weight: 500;
         }
+        body.dark-mode .highlight {
+            color: #FFEB3B; /* Thay đổi màu highlight trong dark-mode để dễ nhìn hơn */
+        }
         .contact {
             font-size: 0.85rem;
             color: #D1D5DB;
@@ -627,6 +629,9 @@
             }
             .clock-box #clock {
                 font-size: 1.1rem;
+            }
+            .clock-box #weather {
+                font-size: 0.9rem;
             }
         }
         @media (max-width: 768px) {
@@ -710,6 +715,9 @@
             .clock-box #clock {
                 font-size: 1rem;
             }
+            .clock-box #weather {
+                font-size: 0.85rem;
+            }
         }
         @media (max-width: 576px) {
             .header {
@@ -756,10 +764,6 @@
             }
             .news-card h3 {
                 font-size: 1.1rem;
-            }
-            .news-card .share-btn {
-                padding: 0.4rem 0.8rem;
-                font-size: 0.85rem;
             }
             .info-box {
                 padding: 0.75rem;
@@ -816,6 +820,9 @@
             }
             .clock-box #clock {
                 font-size: 0.85rem;
+            }
+            .clock-box #weather {
+                font-size: 0.75rem;
             }
         }
         @media (max-width: 400px) {
@@ -874,6 +881,9 @@
             }
             .clock-box #clock {
                 font-size: 0.8rem;
+            }
+            .clock-box #weather {
+                font-size: 0.7rem;
             }
         }
     </style>
@@ -937,6 +947,7 @@
             </div>
             <div class="clock-box" id="clockBox">
                 <p id="clock"></p>
+                <p id="weather"></p>
             </div>
             <div class="news-section" id="newsContent">
                 <h3 class="font-semibold text-lg mb-4">BẢN TIN MỚI NHẤT</h3>
@@ -970,13 +981,9 @@
         </div>
         <div class="timeline-labels">
             <span>00:00</span>
-            <span>03:00</span>
             <span>06:00</span>
-            <span>09:00</span>
             <span>12:00</span>
-            <span>15:00</span>
             <span>18:00</span>
-            <span>21:00</span>
             <span>24:00</span>
         </div>
         <div class="legend">
@@ -991,7 +998,7 @@
         <p>Giáo Xứ Chánh Tòa Mỹ Tho - Giáo Phận Mỹ Tho - Việt Nam</p>
         <p class="contact">Địa chỉ: 32 Hùng Vương, Phường 7, Thành phố Mỹ Tho, Tỉnh Tiền Giang</p>
         <div class="social-icons">
-            <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.facebook.com/tnttchanhtoamytho/" target="_blank"><i class="fab fa-facebook-f"></i></a>
             <a href="https://m.me/tnttchanhtoamytho" target="_blank"><i class="fab fa-facebook-messenger"></i></a>
         </div>
         <p>Thiết kế bởi: <span class="highlight">Ban Truyền Thông & Ban Kỹ Thuật - Trưởng Pr.Le.G.Huy</span></p>
@@ -1124,23 +1131,10 @@
                     card.className = 'news-card';
                     card.innerHTML = `
                         <h3><a href="news.html?id=${originalIndex}">${title}</a></h3>
-                        <button class="share-btn" onclick="shareArticle('${title}', 'news.html?id=${originalIndex}')">Chia sẻ</button>
                     `;
                     newsList.appendChild(card);
                 }
             });
-        }
-
-        function shareArticle(title, url) {
-            const fullUrl = window.location.origin + '/' + url;
-            if (navigator.share) {
-                navigator.share({
-                    title: title,
-                    url: fullUrl
-                }).catch(err => console.error('Lỗi chia sẻ:', err));
-            } else {
-                alert('Trình duyệt không hỗ trợ chia sẻ. Bạn có thể sao chép liên kết: ' + fullUrl);
-            }
         }
 
         function setupPagination() {
@@ -1204,15 +1198,26 @@
             window.moveSlide = moveSlide;
         }
 
-        // Clock and Timeline
-        function updateClock() {
+        // Clock and Weather
+        async function updateClockAndWeather() {
             const now = new Date();
             const time = now.toLocaleTimeString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh', hour12: false });
             const date = now.toLocaleDateString('vi-VN', { weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric' });
             document.getElementById('clock').innerText = `${date}, ${time}`;
+
+            try {
+                const response = await fetch(`http://api.weatherapi.com/v1/current.json?key=fd95ddd6b54c4139b38154826251405&q=My Tho&lang=vi`);
+                if (!response.ok) throw new Error('Không thể tải dữ liệu thời tiết');
+                const data = await response.json();
+                const weather = `${data.current.temp_c}°C, ${data.current.condition.text}`;
+                document.getElementById('weather').innerText = `Thời tiết: ${weather}`;
+            } catch (error) {
+                console.error('Lỗi khi tải thời tiết:', error);
+                document.getElementById('weather').innerText = 'Không thể tải thời tiết.';
+            }
         }
-        setInterval(updateClock, 1000);
-        updateClock();
+        setInterval(updateClockAndWeather, 60000); // Cập nhật mỗi phút
+        updateClockAndWeather();
 
         function startTimeline() {
             const modal = document.getElementById('timelineModal');
