@@ -886,9 +886,13 @@
         </div>
         <div class="timeline-labels">
             <span>00:00</span>
+            <span>03:00</span>
             <span>06:00</span>
+            <span>09:00</span>
             <span>12:00</span>
+            <span>15:00</span>
             <span>18:00</span>
+            <span>21:00</span>
             <span>24:00</span>
         </div>
         <div class="legend">
@@ -985,7 +989,7 @@
                         skipEmptyLines: true,
                         encoding: 'UTF-8',
                         complete: (result) => {
-                            allArticles = result.data.reverse(); // Đảo ngược để tin mới nhất lên đầu
+                            allArticles = result.data; // Lưu danh sách gốc, không đảo ngược
                             if (!allArticles || allArticles.length === 0) {
                                 document.getElementById('newsList').innerHTML = '<p>Không có tin tức để hiển thị.</p>';
                                 return;
@@ -1011,14 +1015,16 @@
             const newsList = document.getElementById('newsList');
             newsList.innerHTML = '';
 
-            const paginatedArticles = allArticles.slice(start, end);
+            // Tạo danh sách hiển thị, đảo ngược để tin mới nhất lên đầu
+            const paginatedArticles = allArticles.slice().reverse().slice(start, end);
             paginatedArticles.forEach((article, index) => {
-                const globalIndex = start + index;
+                const displayIndex = start + index; // Chỉ số trong danh sách hiển thị (đã đảo ngược)
+                const originalIndex = allArticles.length - 1 - displayIndex; // Chỉ số gốc trong allArticles
                 const title = article.title || 'Không có tiêu đề';
                 if (title) {
                     const card = document.createElement('div');
                     card.className = 'news-card';
-                    card.innerHTML = `<h3><a href="news.html?id=${globalIndex}">${title}</a></h3>`;
+                    card.innerHTML = `<h3><a href="news.html?id=${originalIndex}">${title}</a></h3>`;
                     newsList.appendChild(card);
                 }
             });
