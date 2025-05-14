@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ý nghĩa logo Xứ Đoàn Các Thánh Tử Đạo Việt Nam - Giáo Xứ Chánh Tòa Mỹ Tho">
+    <meta name="keywords" content="Xứ Đoàn, Giáo Xứ Chánh Tòa Mỹ Tho, Các Thánh Tử Đạo Việt Nam, logo ý nghĩa">
+    <title>Ý Nghĩa Logo Xứ Đoàn Các Thánh Tử Đạo Việt Nam</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Cinzel:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #F5F5F5 0%, #E0E0E0 100%);
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: #1A1A1A;
+            overflow-x: hidden;
+        }
+        .header {
+            background: linear-gradient(90deg, #A6192E 0%, #8B1625 100%);
+            color: #FFFFFF;
+            padding: 1rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            text-align: center;
+        }
+        .header h2 {
+            font-family: 'Merriweather', serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+        .header p {
+            font-size: 1rem;
+        }
+        .back-btn {
+            background-color: #A6192E;
+            color: #FFFFFF;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 500;
+            font-size: 0.9rem;
+            margin: 1rem 1rem 1rem 0;
+            align-self: flex-start;
+        }
+        .back-btn:hover {
+            background: #8B1625;
+        }
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            flex: 1;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        .book {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            height: 600px;
+            margin: 0 auto;
+            perspective: 1500px;
+        }
+        .page {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #FFF;
+            border: 1px solid #DDD;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transform-origin: left center;
+            transition: transform 0.5s ease-in-out;
+            overflow-y: auto;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            backface-visibility: hidden;
+        }
+        .page-content {
+            flex: 1;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #1A1A1A;
+            margin-top: 2rem;
+        }
+        .page h3 {
+            font-family: 'Merriweather', serif;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #A6192E;
+            margin-bottom: 1rem;
+        }
+        .page p {
+            margin-bottom: 1rem;
+        }
+        .quote {
+            font-weight: bold;
+            font-style: italic;
+            color: #A6192E;
+        }
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 0.2rem;
+            height: 500px; /* Đảm bảo logo nằm chính giữa theo chiều dọc */
+        }
+        .logo-container img {
+            width: 250px;
+            height: 250px;
+        }
+        .page.hidden {
+            display: none;
+        }
+        .page.active {
+            display: flex;
+            transform: rotateY(0deg);
+            z-index: 5;
+        }
+        .page.flipped {
+            transform: rotateY(-180deg);
+            z-index: 4;
+        }
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: #FFFFFF;
+            border: none;
+            padding: 1rem;
+            cursor: pointer;
+            font-size: 1.5rem;
+            border-radius: 50%;
+            z-index: 10;
+            transition: background 0.3s;
+        }
+        .nav-btn:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+        .nav-btn.prev {
+            left: 10px;
+        }
+        .nav-btn.next {
+            right: 10px;
+        }
+        .footer {
+            background-color: #1A1A1A;
+            color: #FFFFFF;
+            padding: 1.5rem 0.5rem;
+            text-align: center;
+            box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.2);
+            margin-top: auto;
+        }
+        .footer p {
+            margin: 0.5rem 0;
+        }
+        .highlight {
+            color: #FFD700;
+            font-weight: 500;
+        }
+        .contact {
+            font-size: 0.85rem;
+            color: #D1D5DB;
+        }
+        @media (max-width: 768px) {
+            .book {
+                height: 500px;
+            }
+            .page h3 {
+                font-size: 1.3rem;
+            }
+            .page-content {
+                font-size: 0.95rem;
+            }
+            .logo-container img {
+                width: 200px;
+                height: 200px;
+            }
+            .logo-container {
+                height: 250px;
+            }
+            .header h2 {
+                font-size: 1.5rem;
+            }
+            .header p {
+                font-size: 0.9rem;
+            }
+            .back-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.85rem;
+            }
+            .nav-btn {
+                padding: 0.8rem;
+                font-size: 1.2rem;
+            }
+        }
+        @media (max-width: 576px) {
+            .book {
+                height: 400px;
+            }
+            .page h3 {
+                font-size: 1.2rem;
+            }
+            .page-content {
+                font-size: 0.9rem;
+            }
+            .logo-container img {
+                width: 150px;
+                height: 150px;
+            }
+            .logo-container {
+                height: 200px;
+            }
+            .header h2 {
+                font-size: 1.25rem;
+            }
+            .header p {
+                font-size: 0.85rem;
+            }
+            .back-btn {
+                padding: 0.3rem 0.6rem;
+                font-size: 0.8rem;
+            }
+            .nav-btn {
+                padding: 0.5rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h2>XỨ ĐOÀN CÁC THÁNH TỬ ĐẠO VIỆT NAM</h2>
+        <p>Giáo Xứ Chánh Tòa Mỹ Tho</p>
+    </div>
+
+    <div class="container">
+        <button class="back-btn" onclick="window.location.href='index.html'">Quay Lại</button>
+        <div class="book" id="book">
+            <!-- Page 1 -->
+            <div class="page active" id="page-1">
+                <div class="logo-container">
+                    <img src="assets/logo.png" alt="Logo Xứ Đoàn">
+                </div>
+                <div class="page-content">
+                    <h3>Ý Nghĩa Logo Xứ Đoàn Các Thánh Tử Đạo Việt Nam</h3>
+                    <p>Xứ Đoàn Các Thánh Tử Đạo Việt Nam, thuộc Giáo Xứ Chánh Tòa, Giáo Phận Mỹ Tho, đã giới thiệu biểu tượng (logo) chính thức của mình. Logo không chỉ là dấu hiệu nhận diện mà còn là dấu chỉ của tinh thần sâu sắc về đức tin, vai trò huấn luyện Thiếu Nhi Thánh Thể Việt Nam (TNTT), và việc làm chứng cho Chúa Kitô giữa cuộc đời.</p>
+                    <h3>1. Thánh Giá - Trung Tâm Đời Sống Đức Tin của TNTT</h3>
+                    <p>Thánh Giá là biểu tượng trung tâm trong phong trào Thiếu Nhi Thánh Thể, nhắc nhở mỗi thiếu nhi và huynh trưởng rằng Chúa Giêsu Kitô là nền tảng của mọi hoạt động và đời sống. Trong logo, Thánh Giá được đặt ở trung tâm như lời tuyên bố mạnh mẽ: mọi hoạt động, suy nghĩ, và hành động của chúng ta đều quy hướng về Chúa Kitô.</p>
+                    <p><span class="quote">"Nếu ai muốn theo Thầy, hãy từ bỏ chính mình, vác thập giá mình mà theo Thầy"</span> (Mt 16:24).</p>
+                </div>
+                <button class="nav-btn next" onclick="flipPage(1, 'next')">❯</button>
+            </div>
+
+            <!-- Page 2 -->
+            <div class="page hidden" id="page-2">
+                <div class="logo-container">
+                    <img src="assets/logo.png" alt="Logo Xứ Đoàn">
+                </div>
+                <div class="page-content">
+                    <h3>2. Ngọn Lửa - Lửa Thánh Thần và Lòng Nhiệt Thành Phục Vụ</h3>
+                    <p>Ngọn lửa trong logo là biểu tượng của Chúa Thánh Thần, Đấng ban nguồn cảm hứng và sức mạnh cho mọi thành viên của TNTT. Trong Thánh Kinh, Chúa Thánh Thần được mô tả là lửa, là gió, là sức mạnh biến đổi. Ngọn lửa trong logo Xứ Đoàn chính là hình ảnh của lòng nhiệt thành, của tình yêu cháy bỏng, giúp chúng ta vượt qua mọi thử thách trong hành trình đức tin.</p>
+                    <p>Ngọn lửa còn tượng trưng cho sự dấn thân và tinh thần sống động của các thiếu nhi. Được huấn luyện theo 10 điều tâm niệm của TNTT, các em được mời gọi không chỉ sống niềm tin mà còn lan tỏa niềm vui của Chúa Giêsu đến với mọi người.</p>
+                </div>
+                <button class="nav-btn prev" onclick="flipPage(2, 'prev')">❮</button>
+                <button class="nav-btn next" onclick="flipPage(2, 'next')">❯</button>
+            </div>
+
+            <!-- Page 3 -->
+            <div class="page hidden" id="page-3">
+                <div class="logo-container">
+                    <img src="assets/logo.png" alt="Logo Xứ Đoàn">
+                </div>
+                <div class="page-content">
+                    <h3>3. Cuốn Sách và Vầng Hào Quang - Ánh Sáng Đức Tin</h3>
+                    <p>Mặc dù không được đề cập trực tiếp trong nội dung, cuốn sách và vầng hào quang thường là biểu tượng phổ biến trong logo TNTT, tượng trưng cho Lời Chúa và sự thánh thiện. Vầng hào quang trong logo là lời mời gọi mỗi thiếu nhi trở thành ánh sáng giữa cuộc đời, sống đời sống đức tin một cách trọn vẹn.</p>
+                    <p><span class="quote">"Các con là ánh sáng thế gian. Một thành xây trên núi không thể bị che giấu"</span> (Mt 5:14).</p>
+                    <p>Vầng hào quang cũng là hình ảnh tượng trưng cho ơn gọi trở nên thánh thiện, không chỉ trong đời sống cá nhân mà còn trong đời sống cộng đoàn.</p>
+                </div>
+                <button class="nav-btn prev" onclick="flipPage(3, 'prev')">❮</button>
+                <button class="nav-btn next" onclick="flipPage(3, 'next')">❯</button>
+            </div>
+
+            <!-- Page 4 -->
+            <div class="page hidden" id="page-4">
+                <div class="logo-container">
+                    <img src="assets/logo.png" alt="Logo Xứ Đoàn">
+                </div>
+                <div class="page-content">
+                    <h3>4. Các Thánh Tử Đạo Việt Nam - Gương Mẫu Đức Tin và Hy Sinh</h3>
+                    <p>Tên gọi Xứ Đoàn Các Thánh Tử Đạo Việt Nam là lời nhắc nhở về sự can đảm và lòng trung thành với đức tin của các ngài. Các Thánh Tử Đạo Việt Nam đã không ngại gian khó, đau đớn hay cái chết để làm chứng cho Thiên Chúa. Họ là những chứng nhân vĩ đại, là tấm gương sáng ngời mà mọi thành viên của Xứ Đoàn noi theo.</p>
+                    <p>Trong phong trào TNTT, các em thiếu nhi được giáo dục để hiểu về những giá trị căn bản của lòng can đảm và sự hy sinh, noi gương các Thánh Tử Đạo Việt Nam để dấn thân và can đảm đứng vững trong đức tin.</p>
+                </div>
+                <button class="nav-btn prev" onclick="flipPage(4, 'prev')">❮</button>
+                <button class="nav-btn next" onclick="flipPage(4, 'next')">❯</button>
+            </div>
+
+            <!-- Page 5 -->
+            <div class="page hidden" id="page-5">
+                <div class="logo-container">
+                    <img src="assets/logo.png" alt="Logo Xứ Đoàn">
+                </div>
+                <div class="page-content">
+                    <h3>5. Màu Sắc Trong Logo và Kết Luận</h3>
+                    <p><strong>Màu đỏ:</strong> Tượng trưng cho máu của các Thánh Tử Đạo, là màu của sự hy sinh và lòng trung thành với Thiên Chúa. Màu đỏ còn là màu của tình yêu mãnh liệt dành cho Chúa Kitô Thánh Thể, mà mỗi thiếu nhi và huynh trưởng trong TNTT đều được mời gọi sống và biểu lộ qua đời sống thường ngày.</p>
+                    <p><strong>Màu vàng:</strong> Tượng trưng cho sự vinh quang, cho niềm hy vọng vào sự sống đời đời và sự chiến thắng của Thiên Chúa. Đối với TNTT, màu vàng còn nhắc nhở về mục tiêu cao cả mà mỗi thiếu nhi và huynh trưởng hướng tới.</p>
+                    <p>Logo của Xứ Đoàn không chỉ là hình ảnh đại diện, mà còn là lời mời gọi sâu sắc đến tất cả các thiếu nhi, huynh trưởng và cộng đoàn cùng sống tinh thần hiệp nhất, hy sinh và làm chứng cho đức tin Công Giáo.</p>
+                </div>
+                <button class="nav-btn prev" onclick="flipPage(5, 'prev')">❮</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p class="highlight">Bản quyền © 2024 - Xứ Đoàn Các Thánh Tử Đạo Việt Nam</p>
+        <p>Giáo Xứ Chánh Tòa Mỹ Tho - Giáo Phận Mỹ Tho - Việt Nam</p>
+        <p class="contact">Địa chỉ: 32 Hùng Vương, Phường 7, Thành phố Mỹ Tho, Tỉnh Tiền Giang</p>
+    </div>
+
+    <script>
+        let currentPage = 1;
+        const totalPages = 5;
+
+        function flipPage(pageNum, direction) {
+            const currentPageElement = document.getElementById(`page-${pageNum}`);
+            if (direction === 'next' && pageNum < totalPages) {
+                currentPageElement.classList.add('flipped');
+                setTimeout(() => {
+                    currentPageElement.classList.add('hidden');
+                    currentPage++;
+                    document.getElementById(`page-${currentPage}`).classList.remove('hidden');
+                    document.getElementById(`page-${currentPage}`).classList.add('active');
+                }, 500);
+            } else if (direction === 'prev' && pageNum > 1) {
+                const prevPageElement = document.getElementById(`page-${pageNum - 1}`);
+                currentPageElement.classList.add('hidden');
+                currentPage--;
+                prevPageElement.classList.remove('hidden');
+                prevPageElement.classList.remove('flipped');
+                prevPageElement.classList.add('active');
+            }
+        }
+
+        // Touch events for swipe
+        let touchStartX = 0;
+        const book = document.getElementById('book');
+        book.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+        });
+        book.addEventListener('touchend', (e) => {
+            const touchEndX = e.changedTouches[0].clientX;
+            const diffX = touchStartX - touchEndX;
+            if (diffX > 50 && currentPage < totalPages) {
+                flipPage(currentPage, 'next');
+            } else if (diffX < -50 && currentPage > 1) {
+                flipPage(currentPage, 'prev');
+            }
+        });
+
+        // Initialize first page
+        document.addEventListener('DOMContentLoaded', () => {
+            for (let i = 1; i <= totalPages; i++) {
+                if (i !== currentPage) {
+                    document.getElementById(`page-${i}`).classList.add('hidden');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
