@@ -21,6 +21,11 @@
             color: #1A1A1A;
             position: relative;
             cursor: url('assets/curs.png') 0 0, auto;
+            transition: background 0.3s, color 0.3s;
+        }
+        body.dark-mode {
+            background: linear-gradient(135deg, #2A2A2A 0%, #1A1A1A 100%);
+            color: #E0E0E0;
         }
         .header {
             background: linear-gradient(90deg, #A6192E 0%, #8B1625 100%);
@@ -33,6 +38,9 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+        }
+        body.dark-mode .header {
+            background: linear-gradient(90deg, #8B1625 0%, #A6192E 100%);
         }
         .header .logo-btn {
             background: none;
@@ -60,6 +68,13 @@
         }
         .header p {
             font-size: 1rem;
+        }
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: #FFFFFF;
+            font-size: 1.5rem;
+            cursor: pointer;
         }
         .nav-bar {
             background-color: #1A1A1A;
@@ -154,6 +169,9 @@
             cursor: pointer;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+        body.dark-mode .clock-box {
+            background: #333;
+        }
         .clock-box:hover {
             transform: translateY(-5px);
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
@@ -163,6 +181,9 @@
             font-size: 1.2rem;
             color: #1A3C5A;
             margin: 0;
+        }
+        body.dark-mode #clock {
+            color: #A3C5E8;
         }
         .timeline-modal {
             display: none;
@@ -178,6 +199,9 @@
             width: 90%;
             max-width: 500px;
             text-align: center;
+        }
+        body.dark-mode .timeline-modal {
+            background: #333;
         }
         .timeline-modal.show {
             display: block;
@@ -195,6 +219,9 @@
             overflow: hidden;
             position: relative;
             margin: 1rem 0;
+        }
+        body.dark-mode .timeline-bar {
+            background: #444;
         }
         .timeline-fill {
             height: 100%;
@@ -220,6 +247,9 @@
             color: #666;
             margin-top: 0.5rem;
         }
+        body.dark-mode .timeline-labels {
+            color: #AAA;
+        }
         .legend {
             font-family: 'Roboto', serif;
             font-size: 0.85rem;
@@ -229,6 +259,10 @@
             border-top: 1px solid #DDD;
             margin-top: 1rem;
             line-height: 1.4;
+        }
+        body.dark-mode .legend {
+            color: #BBB;
+            border-top: 1px solid #555;
         }
         .legend span {
             display: inline-block;
@@ -295,6 +329,12 @@
             font-size: 1.5rem;
             border-radius: 50%;
         }
+        .carousel-btn.pause {
+            top: 20px;
+            right: 10px;
+            padding: 0.5rem;
+            font-size: 1rem;
+        }
         .carousel-btn.prev {
             left: 10px;
         }
@@ -307,6 +347,9 @@
             padding: 1.5rem;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        body.dark-mode .video-section, body.dark-mode .info-box {
+            background: #333;
         }
         .video-section:hover, .info-box:hover {
             transform: translateY(-5px);
@@ -338,6 +381,9 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             margin-bottom: 1rem;
         }
+        body.dark-mode .news-card {
+            background: #333;
+        }
         .news-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
@@ -356,6 +402,19 @@
         }
         .news-card a:hover {
             color: #FFD700;
+        }
+        .news-card .share-btn {
+            background: #A6192E;
+            color: #FFFFFF;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+        .news-card .share-btn:hover {
+            background: #8B1625;
         }
         .pagination {
             display: flex;
@@ -414,6 +473,9 @@
             text-align: left;
             line-height: 1.6;
         }
+        body.dark-mode .info-text p {
+            color: #E0E0E0;
+        }
         .info-image {
             flex: 1;
             min-width: 150px;
@@ -464,6 +526,11 @@
             max-width: 70%;
             font-size: 0.9rem;
         }
+        body.dark-mode .newsletter input {
+            background: #444;
+            color: #E0E0E0;
+            border: 1px solid #666;
+        }
         .newsletter button {
             background-color: #A6192E;
             color: #FFFFFF;
@@ -495,6 +562,9 @@
             flex-wrap: wrap;
             gap: 1rem;
         }
+        body.dark-mode .live-music-bar {
+            background: #333;
+        }
         .live-music-bar h3 {
             font-family: 'Merriweather', serif;
             font-size: 1.25rem;
@@ -509,8 +579,8 @@
             border: none;
             cursor: pointer;
             transition: background-color 0.3s, box-shadow 0.2s;
-            width: 30px;
-            height: 30px;
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -590,6 +660,9 @@
             .carousel-btn {
                 font-size: 1.2rem;
                 padding: 0.8rem;
+            }
+            .carousel-btn.pause {
+                padding: 0.4rem;
             }
             .video-section {
                 padding: 1rem;
@@ -671,22 +744,29 @@
                 font-size: 1rem;
                 padding: 0.5rem;
             }
+            .carousel-btn.pause {
+                padding: 0.3rem;
+            }
             .video-section {
                 padding: 0.75rem;
             }
-            .news-card h3 {
-                font-size: 1rem;
-            }
             .news-card {
-                padding: 0.5rem;
-                margin-bottom: 0.5rem;
+                padding: 0.75rem;
+                margin-bottom: 0.75rem;
+            }
+            .news-card h3 {
+                font-size: 1.1rem;
+            }
+            .news-card .share-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.85rem;
             }
             .info-box {
                 padding: 0.75rem;
                 max-height: 350px;
             }
             .info-text p {
-                font-size: 0.85rem;
+                font-size: 0.9rem;
                 line-height: 1.5;
             }
             .info-image {
@@ -728,7 +808,7 @@
                 font-size: 0.8rem;
             }
             .live-music-bar input[type="range"] {
-                width: 60px;
+                width: 80px;
             }
             .header .logo {
                 width: 80px;
@@ -764,7 +844,7 @@
                 max-height: 300px;
             }
             .info-text p {
-                font-size: 0.8rem;
+                font-size: 0.9rem;
             }
             .info-image {
                 max-width: 120px;
@@ -781,12 +861,12 @@
             .floating-btn {
                 bottom: 5px;
                 right: 5px;
-                width: 35px;
-                height: 35px;
+                width: 40px;
+                height: 40px;
                 font-size: 0.75rem;
             }
             .live-music-bar input[type="range"] {
-                width: 50px;
+                width: 80px;
             }
             .header .logo {
                 width: 70px;
@@ -807,6 +887,9 @@
             <h2>XỨ ĐOÀN CÁC THÁNH TỬ ĐẠO VIỆT NAM</h2>
             <p>Giáo Xứ Chánh Tòa Mỹ Tho</p>
         </div>
+        <button class="theme-toggle" id="themeToggle">
+            <i class="fas fa-moon"></i>
+        </button>
     </div>
     <nav class="nav-bar">
         <ul>
@@ -828,7 +911,7 @@
     <div class="container">
         <div class="main-content">
             <div class="carousel">
-                <div class="carousel-inner" id="carouselInner" style="transform: translateX(-200%);">
+                <div class="carousel-inner" id="carouselInner">
                     <div class="carousel-item">
                         <img src="assets/pope_leo_xiv.jpg" alt="Đức Tân Giáo Hoàng Leo XIV" loading="lazy">
                         <div class="carousel-caption">Tin tức Giáo Hội</div>
@@ -844,6 +927,7 @@
                 </div>
                 <button class="carousel-btn prev" onclick="moveSlide(-1)" aria-label="Chuyển đến slide trước">❮</button>
                 <button class="carousel-btn next" onclick="moveSlide(1)" aria-label="Chuyển đến slide tiếp theo">❯</button>
+                <button class="carousel-btn pause" id="pauseCarousel" aria-label="Tạm dừng carousel"><i class="fas fa-pause"></i></button>
             </div>
             <div class="video-section">
                 <h3 class="font-semibold text-lg mb-4">Video</h3>
@@ -879,7 +963,7 @@
             </ul>
         </div>
     </div>
-    <div class="timeline-modal" id="timelineModal">
+    <div class="timeline-modal" id="timelineModal" role="dialog" aria-modal="true">
         <h3 class="font-semibold text-lg mb-4">Thánh Lễ Trong Ngày</h3>
         <div class="timeline-bar" id="timelineBar">
             <div class="timeline-fill" id="timelineFill"></div>
@@ -913,6 +997,21 @@
         <p>Thiết kế bởi: <span class="highlight">Ban Truyền Thông & Ban Kỹ Thuật - Trưởng Pr.Le.G.Huy</span></p>
     </div>
     <script defer>
+        // Theme toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        const isDarkMode = localStorage.getItem('darkMode') === 'true';
+        if (isDarkMode) {
+            body.classList.add('dark-mode');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            const isDark = body.classList.contains('dark-mode');
+            themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+            localStorage.setItem('darkMode', isDark);
+        });
+
         // Audio controls
         function setupAudioControls() {
             const audio = document.getElementById('liveAudio');
@@ -989,7 +1088,7 @@
                         skipEmptyLines: true,
                         encoding: 'UTF-8',
                         complete: (result) => {
-                            allArticles = result.data; // Lưu danh sách gốc, không đảo ngược
+                            allArticles = result.data;
                             if (!allArticles || allArticles.length === 0) {
                                 document.getElementById('newsList').innerHTML = '<p>Không có tin tức để hiển thị.</p>';
                                 return;
@@ -1015,19 +1114,33 @@
             const newsList = document.getElementById('newsList');
             newsList.innerHTML = '';
 
-            // Tạo danh sách hiển thị, đảo ngược để tin mới nhất lên đầu
             const paginatedArticles = allArticles.slice().reverse().slice(start, end);
             paginatedArticles.forEach((article, index) => {
-                const displayIndex = start + index; // Chỉ số trong danh sách hiển thị (đã đảo ngược)
-                const originalIndex = allArticles.length - 1 - displayIndex; // Chỉ số gốc trong allArticles
+                const displayIndex = start + index;
+                const originalIndex = allArticles.length - 1 - displayIndex;
                 const title = article.title || 'Không có tiêu đề';
                 if (title) {
                     const card = document.createElement('div');
                     card.className = 'news-card';
-                    card.innerHTML = `<h3><a href="news.html?id=${originalIndex}">${title}</a></h3>`;
+                    card.innerHTML = `
+                        <h3><a href="news.html?id=${originalIndex}">${title}</a></h3>
+                        <button class="share-btn" onclick="shareArticle('${title}', 'news.html?id=${originalIndex}')">Chia sẻ</button>
+                    `;
                     newsList.appendChild(card);
                 }
             });
+        }
+
+        function shareArticle(title, url) {
+            const fullUrl = window.location.origin + '/' + url;
+            if (navigator.share) {
+                navigator.share({
+                    title: title,
+                    url: fullUrl
+                }).catch(err => console.error('Lỗi chia sẻ:', err));
+            } else {
+                alert('Trình duyệt không hỗ trợ chia sẻ. Bạn có thể sao chép liên kết: ' + fullUrl);
+            }
         }
 
         function setupPagination() {
@@ -1060,6 +1173,8 @@
             let currentSlide = 0;
             const slides = document.querySelectorAll('.carousel-item');
             const totalSlides = slides.length;
+            let isPaused = false;
+            let carouselInterval;
 
             if (totalSlides === 0) {
                 console.warn('Không có slide nào trong carousel.');
@@ -1067,12 +1182,25 @@
             }
 
             function moveSlide(direction) {
+                if (isPaused) return;
                 currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
                 const carouselInner = document.getElementById('carouselInner');
                 carouselInner.style.transform = `translateX(-${currentSlide * 100}%)`;
             }
 
-            setInterval(() => moveSlide(1), 5000);
+            function startCarousel() {
+                carouselInterval = setInterval(() => {
+                    if (!isPaused) moveSlide(1);
+                }, 5000);
+            }
+
+            const pauseBtn = document.getElementById('pauseCarousel');
+            pauseBtn.addEventListener('click', () => {
+                isPaused = !isPaused;
+                pauseBtn.innerHTML = isPaused ? '<i class="fas fa-play"></i>' : '<i class="fas fa-pause"></i>';
+            });
+
+            startCarousel();
             window.moveSlide = moveSlide;
         }
 
@@ -1095,16 +1223,14 @@
             let massTimes;
 
             function updateMassTimes() {
-                const isSunday = currentDate.getDay() === 0; // 0 là Chủ nhật
+                const isSunday = currentDate.getDay() === 0;
                 massTimes = isSunday
                     ? ['05:15', '07:30', '16:30', '18:30']
                     : ['05:15', '17:45'];
 
-                // Xóa các nhãn thời gian cũ
                 const existingLabels = timelineBar.querySelectorAll('.mass-time');
                 existingLabels.forEach(label => label.remove());
 
-                // Tạo danh sách các thời gian lễ
                 massTimes.forEach(time => {
                     const [hours, minutes] = time.split(':').map(Number);
                     const massDateTime = new Date(currentDate);
@@ -1128,15 +1254,13 @@
                 const currentHour = hours + minutes / 60;
                 const totalHours = 24;
                 let fillWidth = (currentHour / totalHours) * 100;
-                fillWidth = Math.min(100, Math.max(0, fillWidth)); // Giới hạn 0-100%
+                fillWidth = Math.min(100, Math.max(0, fillWidth));
 
-                // Kiểm tra nếu ngày đã thay đổi
                 if (now.getDate() !== currentDate.getDate()) {
                     currentDate = new Date(now);
                     updateMassTimes();
                 }
 
-                // Tạo danh sách thời gian lễ
                 const allMasses = massTimes.map(time => {
                     const [hours, minutes] = time.split(':').map(Number);
                     const massDateTime = new Date(currentDate);
@@ -1144,16 +1268,13 @@
                     return massDateTime.getTime();
                 });
 
-                // Tìm lễ tiếp theo
                 const nextMassIndex = allMasses.findIndex(mass => mass > now);
                 const nextMassTime = nextMassIndex !== -1 ? new Date(allMasses[nextMassIndex]) : null;
-                const timeToNextMass = nextMassTime ? (nextMassTime - now) / (1000 * 60) : Infinity; // Phút đến lễ tiếp theo
+                const timeToNextMass = nextMassTime ? (nextMassTime - now) / (1000 * 60) : Infinity;
 
-                // Xác định màu sắc
                 const hasFutureMass = nextMassIndex !== -1;
                 const allMassesPassed = !hasFutureMass;
 
-                // Cập nhật nhãn lễ hiện tại
                 const massLabels = timelineBar.querySelectorAll('.mass-time');
                 massLabels.forEach((label, index) => {
                     const massTime = allMasses[index];
@@ -1164,25 +1285,25 @@
                 });
 
                 if (allMassesPassed) {
-                    timelineFill.style.backgroundColor = '#FF0000'; // Đỏ: Hết lễ
+                    timelineFill.style.backgroundColor = '#FF0000';
                     if (fillWidth >= 100) {
                         currentDate = new Date(now);
                         currentDate.setDate(now.getDate() + 1);
                         currentDate.setHours(0, 0, 0, 0);
                         updateMassTimes();
-                        fillWidth = 0; // Reset về 00:00 ngày tiếp theo
+                        fillWidth = 0;
                     }
                 } else if (timeToNextMass <= 30) {
-                    timelineFill.style.backgroundColor = '#FFA500'; // Vàng: 30 phút trước lễ
+                    timelineFill.style.backgroundColor = '#FFA500';
                 } else {
-                    timelineFill.style.backgroundColor = '#00FF00'; // Xanh: Còn lễ
+                    timelineFill.style.backgroundColor = '#00FF00';
                 }
 
                 timelineFill.style.width = `${fillWidth}%`;
             }
 
             updateTimeline();
-            const timelineInterval = setInterval(updateTimeline, 1000); // Cập nhật mỗi giây
+            const timelineInterval = setInterval(updateTimeline, 1000);
 
             modal.classList.add('show');
             closeBtn.onclick = () => {
