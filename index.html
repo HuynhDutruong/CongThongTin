@@ -1213,7 +1213,7 @@
                 document.getElementById('weather').innerText = `Thời tiết: ${weather}`;
             } catch (error) {
                 console.error('Lỗi khi tải thời tiết:', error);
-                document.getElementById('weather').innerText = 'Không thể tải thời tiết.';
+                document.getElementById('weather').innerText = '';
             }
         }
         setInterval(updateClockAndWeather, 60000); // Cập nhật mỗi phút
