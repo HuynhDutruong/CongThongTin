@@ -38,10 +38,10 @@
                 color: #A3C5E8;
             }
             .timeline-modal {
-                background: #333;
+                background: #000000;
             }
             .timeline-bar {
-                background: #444;
+                background: #000000;
             }
             .timeline-labels {
                 color: #AAA;
@@ -624,11 +624,20 @@
             }
         }
         @media (max-width: 768px) {
+            .header {
+                padding: 1rem;
+            }
+            .header .logo {
+                width: 100px;
+                height: 100px;
+                animation: pulse 2s infinite;
+            }
             .header h2 {
-                font-size: 1.5rem;
+                font-size: 1.75rem;
+                margin-bottom: 0.5rem;
             }
             .header p {
-                font-size: 0.9rem;
+                font-size: 1rem;
             }
             .nav-bar {
                 padding: 0.5rem 0;
@@ -661,6 +670,13 @@
             .video-section {
                 padding: 1rem;
             }
+            .news-card {
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            .news-card:active {
+                transform: scale(0.98);
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            }
             .news-card h3 {
                 font-size: 1.1rem;
             }
@@ -683,6 +699,25 @@
             }
             .sidebar a {
                 font-size: 0.9rem;
+                position: relative;
+                transition: color 0.3s ease;
+            }
+            .sidebar a:active {
+                color: #FFEB3B;
+            }
+            .sidebar a::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                width: 0;
+                height: 2px;
+                background: #FFEB3B;
+                transition: width 0.3s ease, left 0.3s ease;
+            }
+            .sidebar a:active::after {
+                width: 100%;
+                left: 0;
             }
             .floating-btn {
                 bottom: 10px;
@@ -692,39 +727,73 @@
                 font-size: 0.5rem;
             }
             .live-music-bar input[type="range"] {
-                width: 30px;
+                width: 120px;
+                height: 8px;
+                -webkit-appearance: slider-horizontal;
+            }
+            .live-music-bar button {
+                width: 48px;
+                height: 48px;
+                font-size: 1.2rem;
             }
             .live-music-bar h3 {
-                font-size: 0.8rem;
-            }
-            .header .logo {
-                width: 90px;
-                height: 90px;
-            }
-            .clock-box #clock {
                 font-size: 1rem;
             }
-            .clock-box #weather {
-                font-size: 0.85rem;
+            .floating-btn::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 50%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+                animation: sparkle 2s infinite;
+            }
+            @keyframes sparkle {
+                0% { left: -100%; }
+                50% { left: 100%; }
+                100% { left: 100%; }
             }
         }
         @media (max-width: 576px) {
             .header {
                 flex-direction: column;
-                padding: 0.5rem;
+                padding: 0.75rem;
             }
             .header .text-center {
                 margin: 0.5rem 0;
             }
+            .header .logo {
+                width: 90px;
+                height: 90px;
+                animation: pulse 2s infinite;
+            }
             .header h2 {
-                font-size: 1.25rem;
+                font-size: 1.5rem;
             }
             .header p {
-                font-size: 0.85rem;
+                font-size: 0.9rem;
             }
             .nav-bar a {
                 font-size: 0.9rem;
                 padding: 0.5rem 1rem;
+            }
+            .nav-bar a:active {
+                color: #FFEB3B;
+            }
+            .nav-bar a::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                width: 0;
+                height: 2px;
+                background: #FFEB3B;
+                transition: width 0.3s ease, left 0.3s ease;
+            }
+            .nav-bar a:active::after {
+                width: 100%;
+                left: 0;
             }
             .container {
                 padding: 0 0.25rem;
@@ -801,25 +870,29 @@
                 font-size: 0.8rem;
             }
             .live-music-bar input[type="range"] {
-                width: 80px;
+                width: 100px;
+                height: 8px;
+                -webkit-appearance: slider-horizontal;
             }
+            .live-music-bar button {
+                width: 44px;
+                height: 44px;
+                font-size: 1.1rem;
+            }
+            .live-music-bar h3 {
+                font-size: 0.9rem;
+            }
+        }
+        @media (max-width: 400px) {
             .header .logo {
                 width: 80px;
                 height: 80px;
             }
-            .clock-box #clock {
-                font-size: 0.85rem;
-            }
-            .clock-box #weather {
-                font-size: 0.75rem;
-            }
-        }
-        @media (max-width: 400px) {
             .header h2 {
-                font-size: 1.1rem;
+                font-size: 1.25rem;
             }
             .header p {
-                font-size: 0.8rem;
+                font-size: 0.85rem;
             }
             .nav-bar a {
                 font-size: 0.85rem;
@@ -862,11 +935,15 @@
                 font-size: 0.75rem;
             }
             .live-music-bar input[type="range"] {
-                width: 60px;
+                width: 90px;
             }
-            .header .logo {
-                width: 50px;
-                height: 50px;
+            .live-music-bar button {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            .live-music-bar h3 {
+                font-size: 0.85rem;
             }
             .clock-box #clock {
                 font-size: 0.8rem;
@@ -874,6 +951,11 @@
             .clock-box #weather {
                 font-size: 0.7rem;
             }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
     </style>
 </head>
@@ -1276,7 +1358,6 @@
 
                 const massLabels = timelineBar.querySelectorAll('.mass-time');
                 massLabels.forEach((label, index) => {
-                    const massTime = allMasses[index];
                     label.classList.remove('current');
                     if (nextMassIndex === index) {
                         label.classList.add('current');
