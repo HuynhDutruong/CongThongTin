@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intro - Giáo Xứ Chánh Tòa Mỹ Tho</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000000;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        .logo-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .logo {
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            opacity: 0;
+            animation: fadeIn 1.5s ease-in forwards;
+            position: relative;
+            z-index: 10;
+            overflow: hidden;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: scale(0.5); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        /* Hào quang trắng làm nổi logo */
+        .logo::before {
+            content: '';
+            position: absolute;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.2), transparent 80%);
+            border-radius: 50%;
+            animation: glow 2.5s ease-in-out infinite;
+            z-index: 5;
+        }
+        @keyframes glow {
+            0% { transform: scale(0.9); opacity: 0.9; }
+            50% { transform: scale(1.1); opacity: 0.6; }
+            100% { transform: scale(0.9); opacity: 0.9; }
+        }
+        /* Hiệu ứng pháo hoa nổ bung khắp màn hình */
+        .firework {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: radial-gradient(circle, #FFD700, #a90017, #ffffff, #1E90FF, #9400D3);
+            border-radius: 50%;
+            opacity: 0;
+            animation: explode 2s ease-out forwards;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.8); /* Ánh sáng khi nổ */
+        }
+        @keyframes explode {
+            0% {
+                opacity: 0;
+                transform: scale(0) translate(0, 0);
+            }
+            20% {
+                opacity: 1;
+            }
+            80% {
+                opacity: 0.7;
+            }
+            100% {
+                opacity: 0;
+                transform: scale(8) translate(0, -150px);
+            }
+        }
+        /* Hạt lấp lánh ánh sáng */
+        .sparkle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: radial-gradient(circle, #FFFFFF, #FFD700, #00CED1, #FF69B4);
+            border-radius: 50%;
+            opacity: 0;
+            animation: sparkleAnimation 2s ease-out infinite;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Ánh sáng lấp lánh */
+        }
+        @keyframes sparkleAnimation {
+            0% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(2); }
+            100% { opacity: 0; transform: scale(3); }
+        }
+    </style>
+</head>
+<body>
+    <div class="logo-container" id="logoContainer">
+        <img src="assets/logo.png" alt="Logo Giáo Xứ Chánh Tòa Mỹ Tho" class="logo">
+    </div>
+    <audio id="fireworkSound" src="audio/firework.mp3" preload="auto"></audio>
+    <script>
+        // Phát âm thanh pháo hoa
+        const fireworkSound = document.getElementById('fireworkSound');
+        fireworkSound.play().catch(err => console.log('Lỗi phát âm thanh:', err));
+
+        // Tạo pháo hoa và hạt lấp lánh
+        const logoContainer = document.getElementById('logoContainer');
+        const fireworkCount = 50; // 50 điểm pháo hoa
+        const sparkleCount = 20;  // Tăng hạt lấp lánh
+
+        function createFireworks() {
+            for (let i = 0; i < fireworkCount; i++) {
+                const firework = document.createElement('div');
+                firework.className = 'firework';
+                const x = (Math.random() - 0.5) * 100 + 'vw'; // Vị trí ngẫu nhiên trên màn hình
+                const y = (Math.random() - 0.5) * 100 + 'vh';
+                firework.style.left = x;
+                firework.style.top = y;
+                firework.style.animationDelay = `${Math.random() * 1.5}s`; // Trễ ngẫu nhiên
+                logoContainer.appendChild(firework);
+            }
+        }
+
+        function createSparks() {
+            for (let i = 0; i < sparkleCount; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = `${(Math.random() - 0.5) * 120 + 50}vw`; // Mở rộng quanh logo
+                sparkle.style.top = `${(Math.random() - 0.5) * 120 + 50}vh`;
+                sparkle.style.animationDelay = `${Math.random() * 2}s`;
+                logoContainer.appendChild(sparkle);
+            }
+        }
+
+        // Khởi tạo hiệu ứng
+        createFireworks();
+        createSparks();
+
+        // Chuyển hướng sau 5 giây
+        setTimeout(() => {
+            window.location.href = 'index.html';
+        }, 5000);
+    </script>
+</body>
+</html>
