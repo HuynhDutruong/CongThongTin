@@ -14,26 +14,30 @@
             justify-content: center;
             align-items: center;
             overflow: hidden;
+            font-family: 'Arial', sans-serif;
         }
         .logo-container {
             position: relative;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
+            text-align: center;
         }
         .logo {
             width: 600px;
             height: 600px;
             border-radius: 50%;
             opacity: 0;
-            animation: fadeIn 1.5s ease-in forwards;
+            animation: fadeInOut 1s ease-in-out forwards;
             position: relative;
             z-index: 10;
             overflow: hidden;
         }
-        @keyframes fadeIn {
+        @keyframes fadeInOut {
             0% { opacity: 0; transform: scale(0.5); }
-            100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(1); }
         }
         /* Hào quang trắng làm nổi logo */
         .logo::before {
@@ -43,64 +47,75 @@
             height: 700px;
             background: radial-gradient(circle, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.2), transparent 80%);
             border-radius: 50%;
-            animation: glow 2.5s ease-in-out infinite;
+            animation: glow 1s ease-in-out forwards;
             z-index: 5;
         }
         @keyframes glow {
             0% { transform: scale(0.9); opacity: 0.9; }
             50% { transform: scale(1.1); opacity: 0.6; }
-            100% { transform: scale(0.9); opacity: 0.9; }
+            100% { transform: scale(0.9); opacity: 0; }
         }
         /* Hiệu ứng pháo hoa nổ bung khắp màn hình */
         .firework {
             position: absolute;
-            width: 6px;
-            height: 6px;
-            background: radial-gradient(circle, #FFD700, #a90017, #ffffff, #1E90FF, #9400D3);
+            width: 3px;
+            height: 3px;
+            background: radial-gradient(circle, #FFFFFF, #FFD700);
             border-radius: 50%;
             opacity: 0;
-            animation: explode 2s ease-out forwards;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.8); /* Ánh sáng khi nổ */
+            animation: explode 0.8s ease-out forwards;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
         }
         @keyframes explode {
-            0% {
-                opacity: 0;
-                transform: scale(0) translate(0, 0);
-            }
-            20% {
-                opacity: 1;
-            }
-            80% {
-                opacity: 0.7;
-            }
-            100% {
-                opacity: 0;
-                transform: scale(8) translate(0, -150px);
-            }
+            0% { opacity: 0; transform: scale(0) translate(0, 0); }
+            20% { opacity: 1; }
+            80% { opacity: 0.7; }
+            100% { opacity: 0; transform: scale(5) translate(0, -100px); }
         }
         /* Hạt lấp lánh ánh sáng */
         .sparkle {
             position: absolute;
-            width: 5px;
-            height: 5px;
-            background: radial-gradient(circle, #FFFFFF, #FFD700, #00CED1, #FF69B4);
+            width: 4px;
+            height: 4px;
+            background: radial-gradient(circle, #FFFFFF, #FFD700);
             border-radius: 50%;
             opacity: 0;
-            animation: sparkleAnimation 2s ease-out infinite;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Ánh sáng lấp lánh */
+            animation: sparkleAnimation 0.8s ease-out forwards;
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
         }
         @keyframes sparkleAnimation {
             0% { opacity: 0; transform: scale(0); }
-            50% { opacity: 1; transform: scale(2); }
-            100% { opacity: 0; transform: scale(3); }
+            50% { opacity: 1; transform: scale(1.5); }
+            100% { opacity: 0; transform: scale(2); }
+        }
+        /* Text styles */
+        .text {
+            color: #FFFFFF;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            opacity: 0;
+            animation: fadeInOut 1s ease-in-out forwards;
+            position: relative;
+            z-index: 10;
+            margin: 10px 0;
+        }
+        .text-top {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .text-bottom {
+            font-size: 2rem;
+            font-style: italic;
         }
     </style>
 </head>
 <body>
     <div class="logo-container" id="logoContainer">
+        <div class="text text-top">XỨ ĐOÀN CÁC THÁNH TỬ ĐẠO VIỆT NAM</div>
         <img src="assets/logo.png" alt="Logo Giáo Xứ Chánh Tòa Mỹ Tho" class="logo">
+        <div class="text text-bottom">Giáo xứ Chánh toà Mỹ Tho</div>
     </div>
-    <audio id="fireworkSound" src="audio/firework.mp3" preload="auto"></audio>
+    <audio id="fireworkSound" src="assets/firework.mp3" preload="auto"></audio>
     <script>
         // Phát âm thanh pháo hoa
         const fireworkSound = document.getElementById('fireworkSound');
@@ -108,18 +123,18 @@
 
         // Tạo pháo hoa và hạt lấp lánh
         const logoContainer = document.getElementById('logoContainer');
-        const fireworkCount = 50; // 50 điểm pháo hoa
-        const sparkleCount = 20;  // Tăng hạt lấp lánh
+        const fireworkCount = 1000;
+        const sparkleCount = 50;
 
         function createFireworks() {
             for (let i = 0; i < fireworkCount; i++) {
                 const firework = document.createElement('div');
                 firework.className = 'firework';
-                const x = (Math.random() - 0.5) * 100 + 'vw'; // Vị trí ngẫu nhiên trên màn hình
-                const y = (Math.random() - 0.5) * 100 + 'vh';
+                const x = (Math.random() - 0.5) * 200 + 'vw';
+                const y = (Math.random() - 0.5) * 200 + 'vh';
                 firework.style.left = x;
                 firework.style.top = y;
-                firework.style.animationDelay = `${Math.random() * 1.5}s`; // Trễ ngẫu nhiên
+                firework.style.animationDelay = `${Math.random() * 0.3}s`;
                 logoContainer.appendChild(firework);
             }
         }
@@ -128,9 +143,9 @@
             for (let i = 0; i < sparkleCount; i++) {
                 const sparkle = document.createElement('div');
                 sparkle.className = 'sparkle';
-                sparkle.style.left = `${(Math.random() - 0.5) * 120 + 50}vw`; // Mở rộng quanh logo
-                sparkle.style.top = `${(Math.random() - 0.5) * 120 + 50}vh`;
-                sparkle.style.animationDelay = `${Math.random() * 2}s`;
+                sparkle.style.left = `${(Math.random() - 0.5) * 150 + 50}vw`;
+                sparkle.style.top = `${(Math.random() - 0.5) * 150 + 50}vh`;
+                sparkle.style.animationDelay = `${Math.random() * 0.5}s`;
                 logoContainer.appendChild(sparkle);
             }
         }
@@ -139,10 +154,10 @@
         createFireworks();
         createSparks();
 
-        // Chuyển hướng sau 5 giây
+        // Chuyển hướng sau 1 giây
         setTimeout(() => {
             window.location.href = 'index.html';
-        }, 5000);
+        }, 1000);
     </script>
 </body>
 </html>
