@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bài kiểm tra</title>
+  <style>
+    body {
+      background-color: #f8f1f1;
+      font-family: 'Georgia', serif;
+      color: #333;
+      margin: 0;
+      padding: 2rem;
+      background-image: linear-gradient(to bottom, #f8f1f1, #fff);
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+    .container {
+      background-color: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      max-width: 800px;
+      margin: 0 auto;
+      border: 2px solid #A6192E;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    h1 {
+      font-size: 1.8rem;
+      color: #A6192E;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-weight: normal;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .form-container input,
+    .form-container textarea {
+      width: 100%;
+      padding: 0.6rem;
+      margin: 0.5rem 0;
+      border: 1px solid #A6192E;
+      border-radius: 5px;
+      font-family: 'Georgia', serif;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+    .form-container textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+    .form-container button {
+      background-color: #A6192E;
+      color: #fff;
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-family: 'Georgia', serif;
+      font-size: 1rem;
+      display: block;
+      margin: 1.5rem auto;
+      transition: background-color 0.3s;
+    }
+    .form-container button:hover {
+      background-color: #821523;
+    }
+    .question {
+      margin: 1.5rem 0;
+    }
+    .question p {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+    /* Responsive cho điện thoại */
+    @media (max-width: 600px) {
+      body {
+        padding: 1rem;
+      }
+      .container {
+        padding: 1rem;
+      }
+      h1 {
+        font-size: 1.5rem;
+      }
+      .question p {
+        font-size: 1rem;
+      }
+      .form-container input,
+      .form-container textarea,
+      .form-container button {
+        font-size: 0.9rem;
+        padding: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Bài kiểm tra</h1>
+    <form id="feedbackForm" action="https://formsubmit.co/notification2411.huynhdutruong@gmail.com" method="POST" enctype="multipart/form-data" class="form-container">
+      <input type="text" id="fullName" name="fullName" placeholder="Họ và tên" required>
+      <input type="date" id="dob" name="dob" placeholder="Ngày tháng năm sinh" required>
+      <input type="email" id="gmail" name="gmail" placeholder="Gmail" required>
+      <input type="tel" id="phone" name="phone" placeholder="Số điện thoại" required>
+      <input type="hidden" id="submissionTime" name="submissionTime">
+      <input type="hidden" id="userAgent" name="userAgent">
+      <div id="questions">
+        <!-- Câu hỏi và textarea sẽ được thêm bằng JavaScript -->
+      </div>
+      <button type="submit">Nộp bài</button>
+    </form>
+  </div>
+
+  <script>
+    // Danh sách câu hỏi từ test.csv
+    const allQuestions = [
+      { id: 1, text: "Phong trào Nghĩa Binh Thánh Thể đến Việt Nam vào năm nào?" },
+      { id: 2, text: "Phong trào Nghĩa Binh Thánh Thể được thành lập vào năm nào?" },
+      { id: 3, text: "Nghĩa Binh Thánh Thể tại Sài Gòn được thành lập vào năm nào?" },
+      { id: 4, text: "Vị Tổng Tuyên úy đầu tiên của Phong trào Nghĩa Binh Thánh Thể Việt Nam là ai?" },
+      { id: 5, text: "Nghĩa Binh Thánh Thể được đổi tên thành Phong trào Thiếu Nhi Thánh Thể vào năm nào?" },
+      { id: 6, text: "Cha Tuyên úy hiện tại của Liên đoàn Các Thánh Tử Đạo Việt Nam (Giáo phận Mỹ Tho) là ai?" },
+      { id: 7, text: "Cha Phó Tuyên úy của Liên đoàn Các Thánh Tử Đạo Việt Nam (Giáo phận Mỹ Tho) là ai?" },
+      { id: 8, text: "Cha Tổng Tuyên úy hiện tại của Thiếu Nhi Thánh Thể Việt Nam là ai?" },
+      { id: 9, text: "Hãy viết bốn khẩu hiệu của Phong trào Thiếu Nhi Thánh Thể." },
+      { id: 10, text: "Hãy viết điều luật 1 và 2 trong 10 điều luật của Thiếu Nhi Thánh Thể." },
+      { id: 11, text: "Hãy viết điều luật 3 và 4 trong 10 điều luật của Thiếu Nhi Thánh Thể." },
+      { id: 12, text: "Hãy viết điều luật 5 và 6 trong 10 điều luật của Thiếu Nhi Thánh Thể." },
+      { id: 13, text: "Hãy viết điều luật 7 và 8 trong 10 điều luật của Thiếu Nhi Thánh Thể." },
+      { id: 14, text: "Hãy viết điều luật 9 và 10 trong 10 điều luật của Thiếu Nhi Thánh Thể." },
+      { id: 15, text: "Hãy viết nội quy 1 và 2 trong nội quy sa mạc của Thiếu Nhi Thánh Thể." },
+      { id: 16, text: "Hãy viết nội quy 3 và 4 trong nội quy sa mạc của Thiếu Nhi Thánh Thể." },
+      { id: 17, text: "Hãy viết nội quy 5 và 6 trong nội quy sa mạc của Thiếu Nhi Thánh Thể." },
+      { id: 18, text: "Hãy viết nội quy 7 và 8 trong nội quy sa mạc của Thiếu Nhi Thánh Thể." },
+      { id: 19, text: "Tên Liên đoàn Thiếu Nhi Thánh Thể tại Giáo phận Mỹ Tho là gì?" },
+      { id: 20, text: "Hãy viết toàn bộ 10 điều luật của Thiếu Nhi Thánh Thể." }
+    ];
+
+    // Chọn ngẫu nhiên 10 câu hỏi
+    const questions = allQuestions.sort(() => 0.5 - Math.random()).slice(0, 10);
+
+    // Hiển thị câu hỏi và tạo input cho đáp án
+    const questionContainer = document.getElementById('questions');
+    questions.forEach((q, index) => {
+      const div = document.createElement('div');
+      div.className = 'question';
+      div.innerHTML = `
+        <p>${q.text}</p>
+        <textarea id="answer${q.id}" name="answer${index + 1}" rows="4" placeholder="Nhập đáp án"></textarea>
+        <input type="hidden" name="question${index + 1}" value="${q.text}">
+      `;
+      questionContainer.appendChild(div);
+    });
+
+    // Cập nhật thời gian nộp và user agent trước khi gửi
+    document.getElementById('feedbackForm').addEventListener('submit', function() {
+      document.getElementById('submissionTime').value = new Date().toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' });
+      document.getElementById('userAgent').value = navigator.userAgent;
+    });
+  </script>
+</body>
+</html>
