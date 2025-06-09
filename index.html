@@ -1374,10 +1374,10 @@
                         updateMassTimes();
                         fillWidth = 0;
                     }
-                } //else if (timeToNextMass <= 30) {
-                    timelineFill.style.backgroundColor = '#FFA500';
-                } //else {
-                    timelineFill.style.backgroundColor = '#00FF00';
+                } else if (timeToNextMass <= 30) {
+                    timelineFill.style.backgroundColor = '#FF0000';
+                } else {
+                    timelineFill.style.backgroundColor = '#FF0000';
                 }
 
                 timelineFill.style.width = `${fillWidth}%`;
