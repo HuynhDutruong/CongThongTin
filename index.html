@@ -1296,7 +1296,7 @@
         setInterval(updateClockAndWeather, 600); // Cập nhật mỗi phút
         updateClockAndWeather();
 
-        //function startTimeline() {
+        function startTimeline() {
             const modal = document.getElementById('timelineModal');
             const timelineFill = document.getElementById('timelineFill');
             const timelineBar = document.getElementById('timelineBar');
@@ -1308,7 +1308,7 @@
                 const isSunday = currentDate.getDay() === 0;
                 massTimes = isSunday
                     ? ['05:15', '07:30', '16:30', '18:30']
-                    : ['05:15', '17:45']; 
+                    : ['05:15', '17:45'];
 
                 const existingLabels = timelineBar.querySelectorAll('.mass-time');
                 existingLabels.forEach(label => label.remove());
