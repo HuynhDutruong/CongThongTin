@@ -4,15 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Giáo Xứ Chánh Tòa Mỹ Tho - Giới Thiệu</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Noto+Serif+JP:wght@400;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --gold: #FFD700;
             --gold-light: #FFF9C4;
             --white: #FFFFFF;
             --dark-blue: #0A0E2A;
-            --light-blue: #1E3A8A;
-            --purple: #4A148C;
+            --pink: #FF69B4;
+            --cyan: #00FFFF;
+            --purple: #8A2BE2;
+            --white-glow: rgba(255, 255, 255, 0.5);
         }
         
         * {
@@ -32,11 +34,11 @@
             overflow: hidden;
             font-family: 'Merriweather', cursive;
             position: relative;
-            perspective: 1000px;
+            perspective: 2000px;
         }
         
-        /* Thiên hà 3D */
-        .galaxy-3d {
+        /* Starfield */
+        .starfield {
             position: absolute;
             top: 0;
             left: 0;
@@ -44,64 +46,51 @@
             height: 100%;
             z-index: 1;
             overflow: hidden;
+            transform-style: preserve-3d;
         }
         
         .star {
             position: absolute;
             background-color: var(--white);
             border-radius: 50%;
-            animation: twinkle var(--duration, 5s) infinite ease-in-out;
-            opacity: var(--opacity, 0.8);
-            filter: blur(0.5px);
-        }
-        
-        /* Sao băng */
-        .shooting-star {
-            position: absolute;
-            width: 120px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--white));
-            border-radius: 50%;
-            filter: drop-shadow(0 0 6px var(--gold-light));
-            transform: rotate(var(--angle, -45deg));
-            animation: shooting var(--speed, 4s) linear infinite;
+            animation: starZoom var(--duration, 2s) ease-out forwards;
             opacity: 0;
-            z-index: 2;
+            filter: blur(var(--blur, 0.5px));
+            transform: translateZ(-600px) scale(0);
         }
         
-        .shooting-star::after {
-            content: '';
+        @keyframes starZoom {
+            0% { opacity: 0; transform: translateZ(-600px) scale(0); }
+            50% { opacity: var(--opacity, 0.8); }
+            100% { opacity: var(--opacity, 0.8); transform: translateZ(0) scale(1); }
+        }
+        
+        /* Sparkles */
+        .sparkle {
             position: absolute;
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 15px;
-            height: 15px;
-            background: radial-gradient(circle, var(--white), transparent 70%);
+            width: var(--size, 10px);
+            height: var(--size, 10px);
+            background: radial-gradient(circle, var(--color, var(--gold-light)), transparent 70%);
             border-radius: 50%;
+            z-index: 10;
+            opacity: 0;
+            filter: drop-shadow(0 0 6px var(--color, var(--gold)));
+            animation: sparkleBurst 2s ease-out forwards;
+            transform: translateZ(var(--z, 0px));
         }
         
-        @keyframes shooting {
-            0% { 
-                opacity: 0;
-                transform: translateX(0) translateY(0) rotate(var(--angle, -45deg));
-            }
-            10% { opacity: 1; }
-            80% { opacity: 1; }
-            100% { 
-                opacity: 0;
-                transform: translateX(calc(100vw + 100px)) translateY(calc(-100vh - 100px)) rotate(var(--angle, -45deg));
-            }
+        @keyframes sparkleBurst {
+            0% { opacity: 0; transform: translate(0, 0) scale(0) translateZ(var(--z, 0px)); }
+            50% { opacity: 1; }
+            100% { opacity: 0; transform: translate(var(--dx, 0px), var(--dy, 0px)) scale(1.8) translateZ(var(--z, 0px)); }
         }
         
         /* Logo Container */
         .logo-container {
             position: relative;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            text-align: center;
             z-index: 20;
             width: 100%;
             height: 100%;
@@ -113,8 +102,13 @@
             height: 40vmin;
             min-width: 300px;
             min-height: 300px;
-            margin: 2rem 0;
             transform-style: preserve-3d;
+            animation: logoOscillate 2s ease-in-out infinite 3.5s;
+        }
+        
+        @keyframes logoOscillate {
+            0%, 100% { transform: translateZ(0) scale(1); }
+            50% { transform: translateZ(20px) scale(1.02); }
         }
         
         .logo {
@@ -123,118 +117,94 @@
             border-radius: 50%;
             object-fit: contain;
             opacity: 0;
-            transform: scale(0.5) rotateY(180deg);
-            animation: logoEntrance 2.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            transform: translateY(100vh) translateZ(-400px) scale(0.2) rotate(45deg);
+            animation: logoArcReveal 3s cubic-bezier(0.25, 1, 0.5, 1) forwards, logoPulse 1.5s ease-in-out 3.5s forwards;
             position: relative;
             z-index: 25;
-            filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.9));
+            filter: drop-shadow(0 0 40px rgba(255, 215, 0, 1));
             backface-visibility: hidden;
         }
         
-        @keyframes logoEntrance {
-            0% { opacity: 0; transform: scale(0.5) rotateY(180deg); }
-            40% { opacity: 1; transform: scale(1.1) rotateY(0deg); }
-            60% { transform: scale(0.95); }
-            80% { transform: scale(1.05); }
-            100% { opacity: 1; transform: scale(1) rotateY(0deg); }
+        @keyframes logoArcReveal {
+            0% { opacity: 0; transform: translateY(100vh) translateZ(-400px) scale(0.2) rotate(45deg); }
+            50% { opacity: 1; transform: translateY(0) translateZ(150px) scale(1.3) rotate(0deg); }
+            80% { transform: translateY(0) translateZ(50px) scale(0.95); }
+            100% { opacity: 1; transform: translateY(0) translateZ(0) scale(1) rotate(0deg); }
         }
         
-        /* Ánh sáng thánh */
-        .holy-light {
+        @keyframes logoPulse {
+            0%, 100% { filter: drop-shadow(0 0 40px rgba(255, 215, 0, 1)); }
+            50% { filter: drop-shadow(0 0 60px rgba(255, 215, 0, 1.2)); }
+        }
+        
+        /* Glow Effect */
+        .glow {
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%) translateZ(-50px);
             width: 200%;
             height: 200%;
             background: radial-gradient(circle, 
-                rgba(255, 215, 0, 0.3) 0%, 
-                rgba(255, 215, 0, 0.1) 40%, 
+                rgba(255, 215, 0, 0.5) 0%, 
+                rgba(255, 215, 0, 0.15) 40%, 
                 transparent 70%);
             border-radius: 50%;
             z-index: 15;
             opacity: 0;
-            animation: holyLight 4s ease-in-out infinite 1.5s;
+            animation: glowPulse 3s ease-in-out forwards;
             pointer-events: none;
         }
         
-        @keyframes holyLight {
-            0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(0.8); }
-            50% { opacity: 0.7; transform: translate(-50%, -50%) scale(1.2); }
+        @keyframes glowPulse {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5) translateZ(-50px); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.4) translateZ(-20px); }
+            100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1.2) translateZ(-30px); }
         }
         
-        /* Kim tuyến rơi */
-        .glitter {
+        /* Glow Waves */
+        .glow-wave {
             position: absolute;
-            width: 8px;
-            height: 8px;
-            background: radial-gradient(circle, var(--gold-light), transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) translateZ(-60px);
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, 
+                var(--white-glow) 0%, 
+                transparent 70%);
             border-radius: 50%;
-            z-index: 10;
+            z-index: 14;
             opacity: 0;
-            filter: drop-shadow(0 0 5px var(--gold));
-            animation: glitterFall linear infinite;
+            animation: waveExpand 2s ease-out forwards;
+            pointer-events: none;
         }
         
-        @keyframes glitterFall {
-            0% {
-                opacity: 0;
-                transform: translateY(-10vh) rotate(0deg);
-            }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% {
-                opacity: 0;
-                transform: translateY(110vh) rotate(360deg);
-            }
+        @keyframes waveExpand {
+            0% { opacity: 0.3; transform: translate(-50%, -50%) scale(0.5) translateZ(-60px); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(2) translateZ(-60px); }
         }
         
-        /* Text Styles */
-        .text {
-            color: var(--gold);
+        /* Light Flares */
+        .flare {
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--white), transparent);
+            filter: drop-shadow(0 0 10px var(--white));
+            z-index: 12;
             opacity: 0;
-            text-shadow: 0 0 15px rgba(255, 215, 0, 0.7), 
-                        0 0 30px rgba(255, 215, 0, 0.4);
-            position: relative;
-            z-index: 20;
-            margin: 1rem 0;
-            text-align: center;
-            max-width: 90%;
-            animation: textFadeIn 2s ease-out forwards;
-            animation-delay: 0.8s;
-            font-weight: 700;
-            letter-spacing: 1px;
+            animation: flareSweep 1.5s ease-out forwards;
         }
         
-        @keyframes textFadeIn {
-            from { 
-                opacity: 0; 
-                transform: translateY(30px) scale(0.9);
-                text-shadow: 0 0 50px rgba(255, 215, 0, 0);
-            }
-            to { 
-                opacity: 1; 
-                transform: translateY(0) scale(1);
-                text-shadow: 0 0 15px rgba(255, 215, 0, 0.7), 
-                            0 0 30px rgba(255, 215, 0, 0.4);
-            }
+        @keyframes flareSweep {
+            0% { opacity: 0; transform: translateX(-100vw) rotate(var(--angle, 0deg)); }
+            50% { opacity: 1; }
+            100% { opacity: 0; transform: translateX(100vw) rotate(var(--angle, 0deg)); }
         }
         
-        .text-top {
-            font-size: clamp(1.8rem, 4vw, 3rem);
-            text-transform: uppercase;
-            animation-delay: 0.5s;
-        }
-        
-        .text-bottom {
-            font-size: clamp(1.5rem, 3vw, 2.5rem);
-            font-style: italic;
-            margin-top: 0.5rem;
-            animation-delay: 1s;
-        }
-        
-        /* Pháo hoa cao cấp */
-        .firework-container {
+        /* Light Bursts */
+        .burst-container {
             position: absolute;
             top: 0;
             left: 0;
@@ -243,46 +213,50 @@
             z-index: 5;
             pointer-events: none;
             overflow: hidden;
+            transform-style: preserve-3d;
         }
         
-        .firework {
+        .burst {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            box-shadow: 0 0 25px 6px;
+            z-index: 5;
+            opacity: 0;
+            transform: translateZ(50px);
+        }
+        
+        .burst-particle {
             position: absolute;
             width: 6px;
             height: 6px;
             border-radius: 50%;
-            box-shadow: 0 0 15px 3px;
-            z-index: 5;
-            opacity: 0;
-        }
-        
-        /* Hạt pháo hoa */
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            border-radius: 50%;
             z-index: 6;
             opacity: 0;
             filter: blur(0.5px);
+            transform: translateZ(var(--z, 0px));
         }
         
-        /* Ánh sáng tỏa */
+        /* Light Beams */
         .light-beam {
             position: absolute;
-            width: 300px;
-            height: 300px;
+            width: 400px;
+            height: 400px;
             background: radial-gradient(circle, 
-                rgba(255, 255, 255, 0.1) 0%, 
+                rgba(255, 255, 255, 0.2) 0%, 
                 transparent 70%);
             border-radius: 50%;
             z-index: 3;
             opacity: 0;
-            animation: beamPulse 6s ease-in-out infinite;
+            animation: beamFade 2.5s ease-in-out forwards;
+            transform: translateZ(-100px);
         }
         
-        @keyframes beamPulse {
-            0%, 100% { opacity: 0; transform: scale(0.5); }
-            50% { opacity: 0.3; transform: scale(1.5); }
+        @keyframes beamFade {
+            0% { opacity: 0; transform: scale(0.5) translateZ(-100px); }
+            50% { opacity: 0.5; transform: scale(2) translateZ(-50px); }
+            100% { opacity: 0; transform: scale(2.5) translateZ(-50px); }
         }
         
         /* Responsive */
@@ -294,53 +268,54 @@
                 min-height: 220px;
             }
             
-            .text-top {
-                font-size: 2rem;
-                font-family: 'Merriweather', cursive;
-            }
-            
-            .text-bottom {
-                font-size: 1.7rem;
-                font-family: 'Merriweather', cursive;
-            }
-            
-            .holy-light {
+            .glow, .glow-wave {
                 width: 150%;
                 height: 150%;
+            }
+            
+            .star, .sparkle, .burst-particle {
+                transform: translateZ(calc(var(--z, 0px) * 0.5));
+            }
+            
+            .flare {
+                width: 30px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Thiên hà 3D -->
-    <div class="galaxy-3d" id="galaxy"></div>
+    <!-- Starfield -->
+    <div class="starfield" id="starfield"></div>
     
-    <!-- Ánh sáng tỏa -->
+    <!-- Light Beams -->
     <div class="light-beam" style="top: 20%; left: 10%; animation-delay: 0.5s;"></div>
-    <div class="light-beam" style="top: 70%; left: 80%; animation-delay: 2s;"></div>
+    <div class="light-beam" style="top: 70%; left: 80%; animation-delay: 1.5s;"></div>
     
-    <!-- Container pháo hoa -->
-    <div class="firework-container" id="fireworks"></div>
+    <!-- Burst Container -->
+    <div class="burst-container" id="bursts"></div>
     
-    <!-- Nội dung chính -->
+    <!-- Logo -->
     <div class="logo-container">
         <div class="logo-wrapper">
-            <div class="holy-light"></div>
+            <div class="glow"></div>
+            <div class="glow-wave" style="animation-delay: 2s;"></div>
+            <div class="glow-wave" style="animation-delay: 3.5s;"></div>
             <img src="assets/logo.png" alt="Logo Giáo Xứ Chánh Tòa Mỹ Tho" class="logo">
         </div>
     </div>
     
-    <!-- Âm thanh -->
-    <audio id="bgMusic" src="audio/bgMusic.mp3" preload="auto"></audio>
-    <audio id="fireworkSound" src="audio/firework.mp3" preload="auto"></audio>
+    <!-- Audio -->
+    <audio id="bgMusic" src="assets/audio/upbeat_intro_music.mp3" preload="auto"></audio>
+    <audio id="burstSound" src="audio/firework.mp3" preload="auto"></audio>
     
     <script>
-        // Khởi tạo âm thanh
+        // Initialize audio
         const bgMusic = document.getElementById('bgMusic');
-        const fireworkSound = document.getElementById('fireworkSound');
-        bgMusic.volume = 0.6;
+        const burstSound = document.getElementById('burstSound');
+        bgMusic.volume = 0.7;
+        burstSound.volume = 0.3;
         
-        // Phát nhạc khi người dùng tương tác
+        // Play music on user interaction
         function startAudio() {
             bgMusic.play().catch(e => console.log("Audio error:", e));
             document.removeEventListener('click', startAudio);
@@ -350,181 +325,156 @@
         document.addEventListener('click', startAudio);
         document.addEventListener('touchstart', startAudio);
         
-        // Tạo thiên hà
-        const galaxy = document.getElementById('galaxy');
-        const starCount = 300;
+        // Create starfield
+        const starfield = document.getElementById('starfield');
+        const starCount = window.innerWidth <= 768 ? 80 : 250;
         
         for (let i = 0; i < starCount; i++) {
             const star = document.createElement('div');
             star.className = 'star';
             
-            // Vị trí ngẫu nhiên
             const x = Math.random() * 100;
             const y = Math.random() * 100;
-            
-            // Kích thước ngẫu nhiên (1px đến 4px)
-            const size = Math.random() * 3 + 1;
-            
-            // Thời gian animation (3s đến 10s)
-            const duration = Math.random() * 7 + 3;
-            
-            // Độ mờ
-            const opacity = Math.random() * 0.8 + 0.2;
+            const size = i % 10 === 0 ? Math.random() * 4 + 2 : Math.random() * 2 + 1; // Larger hero stars
+            const opacity = Math.random() * 0.6 + 0.4;
+            const duration = 1.5 + Math.random() * 2;
+            const delay = Math.random() * 2;
+            const blur = i % 10 === 0 ? 0.2 : 0.5;
             
             star.style.left = `${x}%`;
             star.style.top = `${y}%`;
             star.style.width = `${size}px`;
             star.style.height = `${size}px`;
-            star.style.setProperty('--duration', `${duration}s`);
             star.style.setProperty('--opacity', opacity);
-            star.style.animationDelay = `${Math.random() * 10}s`;
+            star.style.setProperty('--duration', `${duration}s`);
+            star.style.setProperty('--blur', `${blur}px`);
+            star.style.animationDelay = `${delay}s`;
             
-            galaxy.appendChild(star);
+            starfield.appendChild(star);
         }
         
-        // Tạo sao băng
-        function createShootingStar() {
-            const star = document.createElement('div');
-            star.className = 'shooting-star';
+        // Create sparkles
+        function createSparkle(x, y, color, size = 10) {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
             
-            // Vị trí bắt đầu ngẫu nhiên
-            const startX = Math.random() * 20;
-            const startY = Math.random() * 20 + 10;
+            const dx = (Math.random() - 0.5) * 300;
+            const dy = (Math.random() - 0.5) * 300;
+            const z = (Math.random() - 0.5) * 150;
             
-            // Góc bay
-            const angle = -45 + (Math.random() * 30 - 15);
+            sparkle.style.left = `${x}px`;
+            sparkle.style.top = `${y}px`;
+            sparkle.style.setProperty('--dx', `${dx}px`);
+            sparkle.style.setProperty('--dy', `${dy}px`);
+            sparkle.style.setProperty('--z', `${z}px`);
+            sparkle.style.setProperty('--color', color);
+            sparkle.style.setProperty('--size', `${size}px`);
+            sparkle.style.animationDelay = `${Math.random() * 0.8}s`;
             
-            // Tốc độ
-            const speed = 3 + Math.random() * 3;
+            document.body.appendChild(sparkle);
             
-            star.style.left = `${startX}%`;
-            star.style.top = `${startY}%`;
-            star.style.setProperty('--angle', `${angle}deg`);
-            star.style.setProperty('--speed', `${speed}s`);
-            star.style.animationDelay = `${Math.random() * 5}s`;
-            
-            document.body.appendChild(star);
-            
-            // Tự xóa sau khi hoàn thành animation
             setTimeout(() => {
-                star.remove();
-            }, speed * 1000);
+                sparkle.remove();
+            }, 2000);
         }
         
-        // Tạo kim tuyến rơi
-        function createGlitter() {
-            const glitter = document.createElement('div');
-            glitter.className = 'glitter';
+        // Create light flare
+        function createFlare() {
+            const flare = document.createElement('div');
+            flare.className = 'flare';
             
-            // Vị trí ngẫu nhiên
-            const x = Math.random() * 100;
+            const y = Math.random() * window.innerHeight;
+            const angle = Math.random() * 30 - 15;
             
-            // Thời gian rơi
-            const duration = 5 + Math.random() * 5;
+            flare.style.top = `${y}px`;
+            flare.style.setProperty('--angle', `${angle}deg`);
+            flare.style.animationDelay = `${Math.random() * 2}s`;
             
-            // Kích thước
-            const size = 4 + Math.random() * 4;
+            document.body.appendChild(flare);
             
-            // Delay
-            const delay = Math.random() * 10;
-            
-            glitter.style.left = `${x}%`;
-            glitter.style.width = `${size}px`;
-            glitter.style.height = `${size}px`;
-            glitter.style.animationDuration = `${duration}s`;
-            glitter.style.animationDelay = `${delay}s`;
-            
-            document.body.appendChild(glitter);
-            
-            // Tự xóa sau khi rơi
             setTimeout(() => {
-                glitter.remove();
-            }, (duration + delay) * 1000);
+                flare.remove();
+            }, 1500);
         }
         
-        // Tạo pháo hoa cao cấp
-        function createFirework(x, y, color) {
-            const firework = document.createElement('div');
-            firework.className = 'firework';
-            firework.style.left = `${x}px`;
-            firework.style.top = `${y}px`;
-            firework.style.boxShadow = `0 0 15px 3px ${color}`;
-            firework.style.backgroundColor = color;
+        // Create light burst
+        function createBurst(x, y, color) {
+            const burst = document.createElement('div');
+            burst.className = 'burst';
+            burst.style.left = `${x}px`;
+            burst.style.top = `${y}px`;
+            burst.style.boxShadow = `0 0 25px 6px ${color}`;
+            burst.style.backgroundColor = color;
             
-            document.getElementById('fireworks').appendChild(firework);
+            document.getElementById('bursts').appendChild(burst);
             
-            // Animation pháo hoa
-            const particleCount = 80 + Math.floor(Math.random() * 70);
+            const particleCount = window.innerWidth <= 768 ? 20 : 60;
             const angleIncrement = (Math.PI * 2) / particleCount;
             
-            // Hiệu ứng nổ sau delay
             setTimeout(() => {
-                // Phát âm thanh
-                fireworkSound.currentTime = 0;
-                fireworkSound.play().catch(e => console.log("Firework sound error:", e));
+                burstSound.currentTime = 0;
+                burstSound.play().catch(e => console.log("Burst sound error:", e));
                 
-                // Ẩn pháo hoa chính
-                firework.style.opacity = '0';
-                firework.style.transform = 'scale(0)';
-                firework.style.transition = 'all 0.5s ease-out';
+                burst.style.opacity = '0';
+                burst.style.transform = 'scale(0) translateZ(50px)';
+                burst.style.transition = 'all 0.4s ease-out';
                 
-                // Tạo các hạt pháo hoa
                 for (let i = 0; i < particleCount; i++) {
                     const particle = document.createElement('div');
-                    particle.className = 'particle';
+                    particle.className = 'burst-particle';
                     particle.style.left = `${x}px`;
                     particle.style.top = `${y}px`;
                     
-                    // Màu sắc
-                    const hueShift = Math.random() * 40 - 20;
+                    const hueShift = Math.random() * 30 - 15;
                     const particleColor = `hsl(${getHue(color) + hueShift}, 100%, 70%)`;
                     particle.style.backgroundColor = particleColor;
-                    particle.style.boxShadow = `0 0 8px 1px ${particleColor}`;
+                    particle.style.boxShadow = `0 0 8px 2px ${particleColor}`;
                     
-                    // Kích thước
-                    const size = 3 + Math.random() * 3;
+                    const size = 4 + Math.random() * 3;
                     particle.style.width = `${size}px`;
                     particle.style.height = `${size}px`;
                     
-                    // Tốc độ
                     const angle = angleIncrement * i;
-                    const velocity = 1.5 + Math.random() * 3;
+                    const velocity = 1.2 + Math.random() * 2.5;
                     const vx = Math.cos(angle) * velocity;
                     const vy = Math.sin(angle) * velocity;
+                    const vz = (Math.random() - 0.5) * 2;
                     
-                    document.getElementById('fireworks').appendChild(particle);
+                    document.getElementById('bursts').appendChild(particle);
                     
-                    // Animation hạt
                     setTimeout(() => {
                         particle.style.opacity = '1';
                         particle.style.transition = 'all 1.2s ease-out';
                         
                         const distance = 60 + Math.random() * 120;
-                        particle.style.transform = `translate(${vx * distance}px, ${vy * distance}px)`;
+                        particle.style.transform = `translate(${vx * distance}px, ${vy * distance}px) translateZ(${vz * distance}px)`;
+                        particle.style.setProperty('--z', `${vz * distance}px`);
                         particle.style.opacity = '0';
                         
-                        // Xóa hạt sau animation
                         setTimeout(() => {
                             particle.remove();
                         }, 1200);
                     }, 0);
                 }
                 
-                // Xóa pháo hoa sau khi hoàn thành
+                // Create sparkles during burst
+                for (let i = 0; i < 15; i++) {
+                    createSparkle(x, y, color, 8 + Math.random() * 4);
+                }
+                
                 setTimeout(() => {
-                    firework.remove();
-                }, 500);
-            }, 500 + Math.random() * 500);
+                    burst.remove();
+                }, 400);
+            }, 300 + Math.random() * 300);
             
-            // Hiển thị pháo hoa
             setTimeout(() => {
-                firework.style.opacity = '1';
-                firework.style.transform = 'scale(1)';
-                firework.style.transition = 'all 0.3s ease-out';
+                burst.style.opacity = '1';
+                burst.style.transform = 'scale(1) translateZ(50px)';
+                burst.style.transition = 'all 0.3s ease-out';
             }, 0);
         }
         
-        // Hàm lấy giá trị Hue từ màu
+        // Get hue from color
         function getHue(color) {
             const temp = document.createElement('div');
             temp.style.color = color;
@@ -533,7 +483,7 @@
             document.body.removeChild(temp);
             
             const match = rgb.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
-            if (!match) return 60; // Màu vàng mặc định
+            if (!match) return 60;
             
             const r = parseInt(match[1]) / 255;
             const g = parseInt(match[2]) / 255;
@@ -558,56 +508,64 @@
             return Math.round(h * 360);
         }
         
-        // Tạo pháo hoa ngẫu nhiên
-        function launchRandomFirework() {
+        // Launch random bursts
+        function launchRandomBurst() {
             const colors = [
-                '#FFD700', // vàng
-                '#FF4500', // đỏ cam
-                '#FF1493', // hồng đậm
-                '#00BFFF', // xanh da trời
-                '#7CFC00', // xanh lá
-                '#9370DB',  // tím
-                '#FF6347'  // cam đỏ
+                '#FFD700', // Gold
+                '#FF69B4', // Pink
+                '#00FFFF', // Cyan
+                '#FF4500', // OrangeRed
+                '#7B68EE', // MediumSlateBlue
+                '#32CD32', // LimeGreen
+                '#FFFFFF'  // White
             ];
             
             const x = Math.random() * window.innerWidth;
-            const y = Math.random() * window.innerHeight * 0.4;
+            const y = Math.random() * window.innerHeight * 0.5;
             const color = colors[Math.floor(Math.random() * colors.length)];
             
-            createFirework(x, y, color);
+            createBurst(x, y, color);
         }
         
-        // Khởi tạo hiệu ứng
-        for (let i = 0; i < 30; i++) {
-            createGlitter();
+        // Initialize sparkles
+        for (let i = 0; i < (window.innerWidth <= 768 ? 20 : 40); i++) {
+            const x = window.innerWidth / 2 + (Math.random() - 0.5) * 400;
+            const y = window.innerHeight / 2 + (Math.random() - 0.5) * 400;
+            const colors = ['#FFD700', '#FF69B4', '#00FFFF', '#FFFFFF'];
+            createSparkle(x, y, colors[Math.floor(Math.random() * colors.length)], 6 + Math.random() * 6);
         }
         
-        // Chạy các hiệu ứng
-        let shootingStarInterval = setInterval(createShootingStar, 2000);
-        let fireworkInterval = setInterval(launchRandomFirework, 800);
-        let glitterInterval = setInterval(createGlitter, 500);
+        // Run effects
+        let burstInterval = setInterval(launchRandomBurst, window.innerWidth <= 768 ? 800 : 500);
+        let sparkleInterval = setInterval(() => {
+            const x = window.innerWidth / 2 + (Math.random() - 0.5) * 400;
+            const y = window.innerHeight / 2 + (Math.random() - 0.5) * 400;
+            const colors = ['#FFD700', '#FF69B4', '#00FFFF', '#FFFFFF'];
+            createSparkle(x, y, colors[Math.floor(Math.random() * colors.length)], 6 + Math.random() * 6);
+        }, 200);
+        let flareInterval = setInterval(createFlare, 1000);
         
-        // Tự động chuyển trang sau 4 giây
+        // Timed bursts for synchronization
+        setTimeout(() => createBurst(window.innerWidth / 2, window.innerHeight / 2, '#FFD700'), 2000);
+        setTimeout(() => createBurst(window.innerWidth / 2, window.innerHeight / 2, '#FF69B4'), 3500);
+        setTimeout(() => createBurst(window.innerWidth / 2, window.innerHeight / 2, '#00FFFF'), 5000);
+        
+        // Redirect after 7 seconds
         setTimeout(() => {
-            clearInterval(shootingStarInterval);
-            clearInterval(fireworkInterval);
-            clearInterval(glitterInterval);
+            clearInterval(burstInterval);
+            clearInterval(sparkleInterval);
+            clearInterval(flareInterval);
             window.location.href = 'index.html';
-        }, 4000);
+        }, 7000);
         
-        // Tối ưu cho mobile
+        // Mobile optimization
         function isMobile() {
             return window.innerWidth <= 768;
         }
         
         if (isMobile()) {
-            // Điều chỉnh cho mobile
-            clearInterval(fireworkInterval);
-            fireworkInterval = setInterval(launchRandomFirework, 1200);
-            
-            // Giảm số lượng sao để tối ưu hiệu suất
             const stars = document.querySelectorAll('.star');
-            for (let i = 150; i < stars.length; i++) {
+            for (let i = 80; i < stars.length; i++) {
                 stars[i].remove();
             }
         }
