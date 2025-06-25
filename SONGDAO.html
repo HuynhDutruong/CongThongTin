@@ -40,7 +40,7 @@
         .nav-bar {
             background-color: #1A1A1A;
             padding: 1rem 0;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 4px rgba(0, 0,0.2);
         }
         .nav-bar ul {
             list-style: none;
@@ -178,6 +178,27 @@
         .chapter-btn i, .nav-btn i {
             font-size: 1.2rem;
         }
+        .mobile-chapter-btn {
+            display: none;
+            background-color: #A6192E;
+            color: #FFFFFF;
+            padding: 0.75rem 1.5rem;
+            border: 2px solid #A6192E;
+            border-radius: 8px;
+            text-decoration: none;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 500;
+            font-size: 1rem;
+            text-align: center;
+            width: 100%;
+            max-width: 300px;
+            margin: 0.5rem 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .mobile-chapter-btn:hover {
+            background-color: #FFFFFF;
+            color: #A6192E;
+        }
         .back-btn {
             display: inline-block;
             color: #FFFFFF;
@@ -239,20 +260,18 @@
                 font-size: 1.25rem;
             }
             .book-frame {
-                width: 100%;
-                min-height: 60vh;
+                display: none;
+            }
+            .chapter-controls .chapter-btn, .chapter-controls .nav-btn {
+                display: none;
+            }
+            .mobile-chapter-btn {
+                display: block;
             }
             .controls {
                 flex-direction: column;
                 align-items: center;
                 gap: 0.75rem;
-            }
-            .chapter-controls {
-                gap: 0.5rem;
-            }
-            .chapter-btn, .nav-btn {
-                padding: 0.5rem 1rem;
-                font-size: 0.9rem;
             }
             .back-btn {
                 padding: 0.5rem 1rem;
@@ -292,7 +311,12 @@
                 <button class="chapter-btn" onclick="openPage(2)">Đ 2</button>
                 <button class="chapter-btn" onclick="openPage(3)">Đ 3</button>
                 <button class="chapter-btn" onclick="openPage(4)">Đ 4</button>
-                <button class="nav-btn" onclick="nextPage()" id="pageBtn"><i class="fas fa-chevron-right"></i> Trang Sau</button>
+                <button class="nav-btn" onclick="nextPage()" id="nextBtn"><i class="fas fa-chevron-right"></i> Trang Sau</button>
+                <!-- Mobile-only buttons -->
+                <a href="SACH_GL/SĐ1.pdf" class="mobile-chapter-btn" target="_blank">[CHƯƠNG 1]</a>
+                <a href="SACH_GL/SĐ2.pdf" class="mobile-chapter-btn" target="_blank">[CHƯƠNG 2]</a>
+                <a href="SACH_GL/SACH2.pdf" class="mobile-chapter-btn" target="_blank">[CHƯƠNG 3]</a>
+                <a href="SACH_GL/SACH3.pdf" class="mobile-chapter-btn" target="_blank">[CHƯƠNG 4]</a>
             </div>
         </div>
     </div>
@@ -301,8 +325,8 @@
         <p>Giáo Xứ Chánh Tòa Mỹ Tho - Giáo Phận Mỹ Tho - Việt Nam</p>
         <p class="contact">Địa chỉ: 32 Hùng Vương, Phường 3, Thành phố Mỹ Tho, Tỉnh Tiền Giang</p>
         <div class="social-icons">
-            <a href="https://www.facebook.com/tnttchanhtoamytho/" target="_blank"><i class="fab fa-facebook"></i></a>
-            <a href="https://m.me/tnttchanhtoamy" target="_blank"><i class="fab fa-facebook-messenger"></i></a>
+            <a href="https://www.facebook.com/tnttchanhtoamytho/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://m.me/tnttchanhtoamytho" target="_blank"><i class="fab fa-facebook-messenger"></i></a>
         </div>
         <p>Thiết kế bởi: <span class="highlight">Ban Truyền Thông & Ban Kỹ Thuật - Trưởng Pr. Le. Leo</span></p>
     </div>
@@ -316,7 +340,7 @@
             const pages = document.querySelectorAll('.book-page');
             const buttons = document.querySelectorAll('.chapter-btn');
             const prevBtn = document.getElementById('prevBtn');
-            const pageBtn = document.getElementById('pageBtn');
+            const nextBtn = document.getElementById('nextBtn');
 
             // Remove active class from all pages and buttons
             pages.forEach(page => {
@@ -329,7 +353,7 @@
             activePage.classList.add('active');
             buttons[page - 1].classList.add('active');
 
-            // Set next page for pagination
+            // Set next page for animation
             if (page < totalPages) {
                 const nextPage = document.getElementById(`page${page + 1}`);
                 nextPage.classList.add('next');
@@ -337,7 +361,7 @@
 
             // Update button states
             prevBtn.disabled = page === 1;
-            pageBtn.disabled = page === totalPages;
+            nextBtn.disabled = page === totalPages;
 
             currentPage = page;
         }
