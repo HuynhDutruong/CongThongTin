@@ -650,11 +650,11 @@
                 align-items: center;
             }
             .nav-bar li {
-                margin: 0.2rem 0;
+                margin: 0.3rem 0;
             }
             .nav-bar a {
-                font-size: 1rem;
-                padding: 0.3rem 0.8rem;
+                font-size: 1.5rem;
+                padding: 0.4rem 0.9rem;
             }
             .carousel-item img {
                 height: 400px;
@@ -977,6 +977,7 @@
             <li><a href="mass.html">GIỜ LỄ</a></li>
             <li><a href="library.html">THƯ VIỆN</a></li>
             <li><a href="https://m.me/tnttchanhtoamytho" target="_blank">NHẮN TIN</a></li>
+            <li><a href="logintest.html">KIỂM TRA</a></li>
         </ul>
     </nav>
     <audio id="liveAudio" src="https://radio.vaticannews.va/stream-vi" preload="none"></audio>
@@ -1010,7 +1011,8 @@
             <div class="video-section">
                 <h3 class="font-semibold text-lg mb-4">Video</h3>
                 <div class="video-wrapper">
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/vyozYvNPo4k?si=1daaguPzP5bHiuOf" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>                </div>
+                    <iframe src="https://www.youtube.com/embed/aEMwyzyWKDE?si=aGlAttMqGK6UdbaN" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
             </div>
             <div class="clock-box" id="clockBox">
                 <p id="clock"></p>
@@ -1038,8 +1040,6 @@
                 <li><a href="https://www.vaticannews.va/vi.html" target="_blank">Vatican News</a></li>
                 <li><a href="https://www.hdgmvietnam.com" target="_blank">Hội Đồng Giám Mục Việt Nam</a></li>
                 <li><a href="https://giaophanmytho.net" target="_blank">Giáo Phận Mỹ Tho</a></li>
-                <li><a href="https://huynhdutruong.github.io/Congdanhgia/" target="_blank">Cổng đánh giá</a></li>
-
             </ul>
         </div>
     </div>
@@ -1295,7 +1295,7 @@
                 setTimeout(updateClockAndWeather, 300000);
             }
         }
-        setInterval(updateClockAndWeather, 6000); // Cập nhật mỗi phút
+        setInterval(updateClockAndWeather, 60000); // Cập nhật mỗi phút
         updateClockAndWeather();
 
         function startTimeline() {
@@ -1377,9 +1377,9 @@
                         fillWidth = 0;
                     }
                 } else if (timeToNextMass <= 30) {
-                    timelineFill.style.backgroundColor = '#FF0000';
+                    timelineFill.style.backgroundColor = '#FFA500';
                 } else {
-                    timelineFill.style.backgroundColor = '#FF0000';
+                    timelineFill.style.backgroundColor = '#00FF00';
                 }
 
                 timelineFill.style.width = `${fillWidth}%`;
