@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sách Giáo Lý - Giáo Xứ Chánh Tòa Mỹ Tho</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #F5F5F5;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: #1A1A1A;
+        }
+        .header {
+            background-color: #A6192E;
+            color: #FFFFFF;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .header h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        .nav-bar {
+            background-color: #1A1A1A;
+            padding: 1rem 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .nav-bar ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+        }
+        .nav-bar li {
+            margin: 0 2rem;
+        }
+        .nav-bar a {
+            color: #FFFFFF;
+            text-decoration: none;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+        .nav-bar a:hover {
+            color: #FFD700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+        }
+        .container {
+            max-width: 1400px;
+            margin: 1rem auto;
+            padding: 0 1rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .book-container {
+            background: #FFFFFF;
+            border: 1px solid #D3D3D3;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            width: 100%;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .book-container h2 {
+            font-family: 'Merriweather', serif;
+            font-size: 1.75rem;
+            color: #A6192E;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+        .book-frame {
+            perspective: 1500px;
+            width: 95%;
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: 80vh;
+            position: relative;
+            background: linear-gradient(to bottom, #f0f0f0, #e0e0e0);
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        .book-page {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #FFF;
+            border: 2px solid #A6192E;
+            border-radius: 6px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 1s ease-in-out;
+            transform-origin: left center;
+            backface-visibility: hidden;
+        }
+        .book-page iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 4px;
+        }
+        .book-page.active {
+            transform: rotateY(0deg);
+            z-index: 10;
+        }
+        .book-page.next {
+            transform: rotateY(180deg);
+            z-index: 5;
+            opacity: 0.5;
+        }
+        .controls {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            margin-bottom: 1rem;
+            gap: 1rem;
+        }
+        .chapter-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .chapter-btn, .nav-btn {
+            background-color: #A6192E;
+            color: #FFFFFF;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: background-color 0.3s, transform 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .chapter-btn:hover, .nav-btn:hover {
+            background-color: #8B1625;
+            transform: translateY(-2px);
+        }
+        .chapter-btn.active {
+            background-color: #FFD700;
+            color: #1A1A1A;
+            transform: none;
+        }
+        .nav-btn:disabled {
+            background-color: #D3D3D3;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+        .chapter-btn i, .nav-btn i {
+            font-size: 1.2rem;
+        }
+        .back-btn {
+            display: inline-block;
+            color: #FFFFFF;
+            background-color: #A6192E;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .back-btn:hover {
+            background-color: #8B1625;
+            transform: translateY(-2px);
+        }
+        .footer {
+            background-color: #1A1A1A;
+            color: #FFFFFF;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.2);
+            margin-top: auto;
+        }
+        .footer .social-icons {
+            margin: 1.5rem 0;
+        }
+        .footer .social-icons a {
+            color: #FFFFFF;
+            font-size: 1.8rem;
+            margin: 0 1rem;
+            transition: color 0.3s;
+        }
+        .footer .social-icons a:hover {
+            color: #FFD700;
+        }
+        .highlight {
+            color: #FFD700;
+            font-weight: 500;
+        }
+        .contact {
+            font-size: 1rem;
+            color: #D1D5DB;
+        }
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            .header p {
+                font-size: 0.9rem;
+            }
+            .nav-bar ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            .nav-bar li {
+                margin: 0.75rem 0;
+            }
+            .book-container h2 {
+                font-size: 1.25rem;
+            }
+            .book-frame {
+                width: 100%;
+                min-height: 60vh;
+            }
+            .controls {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.75rem;
+            }
+            .chapter-controls {
+                gap: 0.5rem;
+            }
+            .chapter-btn, .nav-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+            .back-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>XỨ ĐOÀN CÁC THÁNH TỬ ĐẠO VIỆT NAM</h1>
+        <p>Giáo Xứ Chánh Tòa Mỹ Tho</p>
+    </div>
+    <div class="container">
+        <div class="book-container">
+            <div class="controls">
+                <a href="book.html" class="back-btn"><i class="fas fa-arrow-left"></i> Quay Lại</a>
+            </div>
+            <h2>Sách Giáo Lý</h2>
+            <div class="book-frame" id="bookFrame">
+                <div class="book-page active" id="page1">
+                    <iframe src="SACH_GL/SĐ1.pdf" title="Chương 1"></iframe>
+                </div>
+                <div class="book-page" id="page2">
+                    <iframe src="SACH_GL/SĐ2.pdf" title="Chương 2"></iframe>
+                </div>
+                <div class="book-page" id="page3">
+                    <iframe src="SACH_GL/SĐ3.pdf" title="Chương 3"></iframe>
+                </div>
+                <div class="book-page" id="page4">
+                    <iframe src="SACH_GL/SĐ4.pdf" title="Chương 4"></iframe>
+                </div>
+            </div>
+            <div class="chapter-controls">
+                <button class="nav-btn" onclick="prevPage()" id="prevBtn" disabled><i class="fas fa-chevron-left"></i> Trang Trước</button>
+                <button class="chapter-btn active" onclick="openPage(1)">Đ 1</button>
+                <button class="chapter-btn" onclick="openPage(2)">Đ 2</button>
+                <button class="chapter-btn" onclick="openPage(3)">Đ 3</button>
+                <button class="chapter-btn" onclick="openPage(4)">Đ 4</button>
+                <button class="nav-btn" onclick="nextPage()" id="pageBtn"><i class="fas fa-chevron-right"></i> Trang Sau</button>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <p class="highlight">Bản quyền © 2024 - Xứ Đoàn Các Thánh Tử Đạo Việt Nam</p>
+        <p>Giáo Xứ Chánh Tòa Mỹ Tho - Giáo Phận Mỹ Tho - Việt Nam</p>
+        <p class="contact">Địa chỉ: 32 Hùng Vương, Phường 3, Thành phố Mỹ Tho, Tỉnh Tiền Giang</p>
+        <div class="social-icons">
+            <a href="https://www.facebook.com/tnttchanhtoamytho/" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://m.me/tnttchanhtoamy" target="_blank"><i class="fab fa-facebook-messenger"></i></a>
+        </div>
+        <p>Thiết kế bởi: <span class="highlight">Ban Truyền Thông & Ban Kỹ Thuật - Trưởng Pr. Le. Leo</span></p>
+    </div>
+    <script>
+        let currentPage = 1;
+        const totalPages = 4;
+
+        function openPage(page) {
+            if (page < 1 || page > totalPages) return;
+
+            const pages = document.querySelectorAll('.book-page');
+            const buttons = document.querySelectorAll('.chapter-btn');
+            const prevBtn = document.getElementById('prevBtn');
+            const pageBtn = document.getElementById('pageBtn');
+
+            // Remove active class from all pages and buttons
+            pages.forEach(page => {
+                page.classList.remove('active', 'next');
+            });
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // Set active page and button
+            const activePage = document.getElementById(`page${page}`);
+            activePage.classList.add('active');
+            buttons[page - 1].classList.add('active');
+
+            // Set next page for pagination
+            if (page < totalPages) {
+                const nextPage = document.getElementById(`page${page + 1}`);
+                nextPage.classList.add('next');
+            }
+
+            // Update button states
+            prevBtn.disabled = page === 1;
+            pageBtn.disabled = page === totalPages;
+
+            currentPage = page;
+        }
+
+        function prevPage() {
+            if (currentPage > 1) {
+                openPage(currentPage - 1);
+            }
+        }
+
+        function nextPage() {
+            if (currentPage < totalPages) {
+                openPage(currentPage + 1);
+            }
+        }
+    </script>
+</body>
+</html>
