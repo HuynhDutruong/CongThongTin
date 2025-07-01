@@ -1,0 +1,45 @@
+{
+  "tables": [
+    {
+      "name": "Tabor 3, Đợt 2",
+      "data": [
+        {"so_tt": 1, "ten_thanh": "Phêrô", "ho_ten": "Lê Gia Huy", "ngay_sinh": "27/05/2004", "gio_xu": "Chánh tòa", "nganh": "Nghĩa sĩ"},
+        {"so_tt": 2, "ten_thanh": "Maria", "ho_ten": "Trần Thị Mỹ", "ngay_sinh": "16/03/2003", "gio_xu": "Chánh tòa", "nganh": "Nghĩa sĩ"},
+        {"so_tt": 3, "ten_thanh": "Maria", "ho_ten": "Lê Đăng Thu Thảo", "ngay_sinh": "03/02/2003", "gio_xu": "Chánh tòa", "nganh": "Thiệu nhi"},
+        {"so_tt": 4, "ten_thanh": "Têrêsa", "ho_ten": "Phạm Lê Thu Thảo", "ngay_sinh": "15/05/1999", "gio_xu": "Chánh tòa", "nganh": "Nghĩa sĩ"},
+        {"so_tt": 5, "ten_thanh": "Têrêsa", "ho_ten": "Trần Ngọc Tú Trân", "ngay_sinh": "24/10/2007", "gio_xu": "Chánh tòa", "nganh": "Nghĩa sĩ"},
+        {"so_tt": 6, "ten_thanh": "Giuseppe", "ho_ten": "Tăng Văn Đan", "ngay_sinh": "28/02/1991", "gio_xu": "Chánh tòa", "nganh": "Thiệu nhi"},
+        {"so_tt": 7, "ten_thanh": "Maria", "ho_ten": "Triệu Xuân Nghị", "ngay_sinh": "09/07/2005", "gio_xu": "Chánh tòa", "nganh": "Thiệu nhi"}
+      ]
+    },
+    {
+      "name": "Tabor 4, Đợt 2",
+      "data": [
+        {"so_tt": 1, "ten_thanh": "Giuseppe", "ho_ten": "Mãi Hồng Phúc", "ngay_sinh": "19/03/2007", "gio_xu": "Chánh tòa", "nganh": "Thiệu nhi"},
+        {"so_tt": 2, "ten_thanh": "Phanxico Xavie", "ho_ten": "Nguyễn Ngọc Tú", "ngay_sinh": "07/12/2010", "gio_xu": "Chánh tòa", "nganh": "Thiệu nhi"},
+        {"so_tt": 3, "ten_thanh": "Maria", "ho_ten": "Nguyễn Hoàng Anh", "ngay_sinh": "27/10/2007", "gio_xu": "Chánh tòa", "nganh": "Thiệu nhi"},
+        {"so_tt": 4, "ten_thanh": "Matthêu", "ho_ten": "Trần Gia Bảo", "ngay_sinh": "17/12/2008", "gio_xu": "Chánh tòa", "nganh": "Ấu nhi"},
+        {"so_tt": 5, "ten_thanh": "Phêrô", "ho_ten": "Nguyễn Huyền Hiến Minh", "ngay_sinh": "05/11/2009", "gio_xu": "Chánh tòa", "nganh": "Thiệu nhi"},
+        {"so_tt": 6, "ten_thanh": "Giuseppe", "ho_ten": "Đào Minh Tú", "ngay_sinh": "03/11/2009", "gio_xu": "Chánh tòa", "nganh": "Ấu nhi"},
+        {"so_tt": 7, "ten_thanh": "Giuseppe", "ho_ten": "Phan Phúc Duy", "ngay_sinh": "05/08/2003", "gio_xu": "Chánh tòa", "nganh": "Thiệu nhi"}
+      ]
+    },
+    {
+      "name": "Đánh Sách Đăng Ký Học Huynh Trưởng Cấp I",
+      "data": [
+        {"so_tt": 1, "ten_thanh": "Phêrô", "ho_ten": "Nguyễn Minh Khang", "ngay_sinh": "04/02/2007", "gio_xu": "Chánh tòa", "nganh": null},
+        {"so_tt": 2, "ten_thanh": "Isave", "ho_ten": "Nguyễn Hoàng Mai Vy", "ngay_sinh": "07/12/2010", "gio_xu": "Chánh tòa", "nganh": null},
+        {"so_tt": 3, "ten_thanh": "Catarina", "ho_ten": "Bùi Ngọc Anh Quyên", "ngay_sinh": "08/05/2010", "gio_xu": "Chánh tòa", "nganh": null},
+        {"so_tt": 4, "ten_thanh": "Maria", "ho_ten": "Trịnh Bảo Châu", "ngay_sinh": "28/02/2010", "gio_xu": "Chánh tòa", "nganh": null},
+        {"so_tt": 5, "ten_thanh": "Anna", "ho_ten": "Đào Ngọc Liên Trân", "ngay_sinh": "23/01/2009", "gio_xu": "Chánh tòa", "nganh": null},
+        {"so_tt": 6, "ten_thanh": "Phạolo", "ho_ten": "Trần Hoàng Quân", "ngay_sinh": "24/04/2011", "gio_xu": "Chánh tòa", "nganh": null},
+        {"so_tt": 7, "ten_thanh": "Phêrô", "ho_ten": "Nguyễn Hoàng Trọng Nhân", "ngay_sinh": "11/07/2010", "gio_xu": "Chánh tòa", "nganh": null},
+        {"so_tt": 8, "ten_thanh": "Giuseppe", "ho_ten": "Lê Hoàng Thiêm Lộc", "ngay_sinh": "30/06/2010", "gio_xu": "Chánh tòa", "nganh": null},
+        {"so_tt": 9, "ten_thanh": "Gioan Baotixita", "ho_ten": "Nguyễn Hữu Tâm", "ngay_sinh": "27/08/2010", "gio_xu": "Chánh tòa", "nganh": null},
+        {"so_tt": 10, "ten_thanh": "Cecilia", "ho_ten": "Đặng Thị Anh", "ngay_sinh": "16/09/2009", "gio_xu": "Chánh tòa", "nganh": null},
+        {"so_tt": 11, "ten_thanh": "Maria", "ho_ten": "Lưu Ngọc Đan Quyên Giao", "ngay_sinh": "20/11/2009", "gio_xu": "Chánh tòa", "nganh": null},
+        {"so_tt": 12, "ten_thanh": "Maria", "ho_ten": "Nguyễn Ngọc Băng Tâm", "ngay_sinh": "26/09/2011", "gio_xu": "Chánh tòa", "nganh": null}
+      ]
+    }
+  ]
+}
